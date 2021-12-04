@@ -12,7 +12,7 @@ public class Exam1 {
   //변수 선언
   //- 값을 저장할 메모리를 준비시키는 명령문
   //테스트 URL:
-  //=> http://localhost:8080/lang/variable/exam1/test1?name=%ED%99%8D%EA%B8%B8%EB%8F%99&tel=010-1111-2222&gender=woman
+  //=> http://localhost:8080/lang/variable/exam1/test1?name=원더우먼&tel=010-1111-2222&gender=woman
   @GetMapping("/test1")
   public String test1(String name, String tel, String gender) {
     return "클라이언트에서 받은 값 = " + name + "," + tel + "," + gender;
