@@ -46,9 +46,6 @@ public class Exam4 {
   // => /static/lang/literal/variable/exam4/test2.html
   @GetMapping("/test2")
   public Object test2(int v1, int v2, String op) {
-    System.out.println(">" + v1);
-    System.out.println(">" + v2);
-    System.out.println(">" + op);
 
     int result = 0;
     switch (op) {
@@ -63,9 +60,16 @@ public class Exam4 {
     return result;
   }
 
+
+  // 테스트:
+  // => /static/lang/literal/variable/exam4/test2.html
+  @GetMapping("/test3")
+  public Object test3() {
+
+    String[] names = new String[] {"홍길동", "임꺽정", "유관순", "안중근", "윤봉길"};
+    return names;
+  }
+
 }
-
-
-
 
 
