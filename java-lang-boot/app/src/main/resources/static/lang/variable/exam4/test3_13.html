@@ -17,12 +17,16 @@ var xBtn = document.querySelector("#x-btn");
 
 xBtn.addEventListener("click", function() {
   
-  var result = fetch("/lang/variable/exam4/test3");
+  var result = fetch("test3"); //"/lang/variable/exam4/test3" 절대경로
   var result2 = result.then(function(response) {
 	  return response.json();
   });
-  result2.then(function(jsonData) {
-    console.log(jsonData)
+	result2.then(function(names) {
+		names.forEach(function(name) {
+		  var li = document.createElement("li");
+	    li.innerHTML = name;
+	    xNamelist.appendChild(li);
+		})
   });
   
 	

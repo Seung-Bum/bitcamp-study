@@ -62,7 +62,7 @@ public class Exam4 {
 
 
   // 테스트:
-  // => /static/lang/literal/variable/exam4/test2.html
+  // => /static/lang/literal/variable/exam4/test3.html
   @GetMapping("/test3")
   public Object test3() {
 
