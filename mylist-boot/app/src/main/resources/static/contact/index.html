@@ -19,17 +19,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-<!--                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td> -->
-            </tr>
         </tbody>
     </table>
 
 <script type="text/javascript">
-
     var tbody = document.querySelector("#x-contact-tbl tbody");
 
     fetch("/contact/list").then(function(response){
@@ -37,22 +30,18 @@
     }).then(function(arr){
         for (var str of arr) {
         console.log(str)
-        // 데이터를 , 기준으로 분해하여 배열로 저장
+        // 데이터를 "," 기준으로 분해하여 배열로 저장
         var contact = str.split(",")
-        console.log(contact)
-
         var tr = document.createElement("tr");
         // 쿼리스트링에서 이메일 값을 추출한다.
         tr.innerHTML=`<td><a href="view.html?email=${contact[1]}">${contact[0]}</a></td>
                         <td>${contact[1]}</td>
                         <td>${contact[2]}</td>
-                        <td>${contact[3]}</td>`
-
+                        <td>${contact[3]}</td>`;
+                        
         tbody.appendChild(tr);
     }
     });
-
-
 </script>
 </body>
 </html>
