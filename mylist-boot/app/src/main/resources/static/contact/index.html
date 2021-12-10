@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연락처</title>
+</head>
+<body>
+    <h1>연락처</h1>
+    <table id="x-contact-tbl" border="1">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>전화</th>
+                <th>회사</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>홍길동</td>
+                <td>hong@test.com</td>
+                <td>010-1111-2222</td>
+                <td>비트캠프</td>
+            </tr>
+        </tbody>
+    </table>
+
+<script type="text/javascript">
+
+    var tbody = document.querySelector("#x-contact-tbl tbody");
+    
+    fetch("/contact/list").then(function(response){
+        return response.json(); // 자바스크립트로 객체로 변환
+    }).then(function(arr){
+        for (var str of arr) {
+        console.log(str)
+        // 데이터를 , 기준으로 분해하여 배열로 저장
+        var contact = str.split(",")
+        var tr = document.createElement("tr");
+        tr.innerHTML=`<td>${contact[0]}</td>
+                        <td>${contact[1]}</td>
+                        <td>${contact[2]}</td>
+                        <td>${contact[3]}</td>`
+
+        tbody.appendChild(tr);
+    }
+    });
+
+
+</script>
+</body>
+</html>
