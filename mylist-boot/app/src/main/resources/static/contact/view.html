@@ -7,24 +7,57 @@
     <title>연락처</title>
 </head>
 <body>
-<h1>새 연락처</h1>
+<h1>연락처 상세정보</h1>
 <form>
     이름:<input id="x-name" type="text"><br>
     이메일:<input id="x-email" type="email"><br>
     전화:<input id="x-tel" type="tel"><br>
     회사:<input id="x-company" type="text"><br>
-    <button id="x-add-btn" type="button">추가</button>
+    <button id="x-update-btn" type="button">변경</button>
     <button id="x-cancel-btn" type="button">취소</button>
 </form>
 
 
 <script type="text/javascript">
+
+// 요청 유효성 검사
+// 상세정보인 이메일을 안줬을 경우에 대한 예외 처리
+if (location.href.indexOf('?') == -1) {
+  window.alert("요청이 올바르지 않습니다!")
+  location.href = "index.html";
+}
+
+//URL에서 쿼리스트링을 추출하여 파라미터의 이름과 값을 분리한다.
+//console.log(location.href.split('?')[1]);
+var params = new URLSearchParam(location.href.split('?')[1]);
+
+var email = params.get("email");
+if (email == null) {
+  window.alert("이메일이 없습니다.");
+  location.href = "index.html";
+}
+
 var xName = document.querySelector("#x-name");
 var xEmail = document.querySelector("#x-email");
 var xTel = document.querySelector("#x-tel");
 var xCompany = document.querySelector("#x-company");
 
-document.querySelector("#x-add-btn").onclick = function() {
+
+// 이메일 가지고 연락처 상세정보를 가져와서 입력폼에 넣는다.
+fetch(`/contact/get?email=${email}`) ...
+
+var result = "홍길동,hong@test.com,010-1111-2222,비트캠프";
+
+
+// 만약 빈문자열이면 alert 띄우기
+var contact = result.split(",");
+xName.value = contact[0];
+xEmail.value = contact[1];
+xTel.value = contact[2];
+xCompany.value = contact[3];
+
+
+document.querySelector("#x-update-btn").onclick = function() {
   fetch(`/contact/add?name=${xName.value}&email=${xEmail.value}&tel=${xTel.value}&company=${xCompany.value}`)
     .then(function(response) {
       return response.text(); // 서버에서 보낸 데이터를 그냥 그대로 텍스트로 리턴해줘! JSON 문자열을 처리하지마
