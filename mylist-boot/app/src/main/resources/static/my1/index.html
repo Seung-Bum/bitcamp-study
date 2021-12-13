@@ -2,13 +2,52 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mylist!</title>
+<title>my1</title>
 </head>
 <body>
 
-<h1>포켓몬리스트</h1>
+<h1>포켓몬 도감</h1>
+
+<p><a href="./form.html">포켓몬 입력</a></p>
+<table id="x-poketmon-table" border="1">
+<thead>
+  <tr>
+    <th>No</th>
+    <th>이름</th>
+    <th>속성</th>
+    <th>스킬</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<script type="text/javascript">
+var tbody = document.querySelector("#x-poketmon-table");
+
+fetch("/poketmons/list")
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(poketmons) {
+    console.log(poketmons)
+
+  for (var poketmon of poketmons) {
+    var values = poketmon.split(",");
+    var tr = document.createElement("tr");
+    tr.innerHTML = `<td>${values[0]}</td>
+    <td>${values[1]}</td>
+    <td>${values[2]}</td>
+    <td>${values[3]}</td>`;
+
+    tbody.appendChild(tr);
+  };
+
+});
 
 
 
+
+</script>
 </body>
 </html>

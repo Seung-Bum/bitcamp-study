@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>my1</title>
+</head>
+<body>
+<h1>포켓몬 입력</h1>
+
+<form>
+no*: <input id="x-no" type="text"><br>
+이름: <input id="x-name" type="text"><br>
+속성: <input id="x-att" type="text"><br>
+스킬: <input id="x-skill" type="text"><br>
+별표(*) 항목은 필수 입력입니다.<br>
+<button id="x-add-btn" type="button">등록</button>
+<button id="x-cancel-btn" type="button">취소</button>
+</form>
+
+<script type="text/javascript">
+  var no = document.querySelector("#x-no");
+  var poketName = document.querySelector("#x-name");
+  var att = document.querySelector("#x-att");
+  var skill = document.querySelector("#x-skill");
+
+  var addBtn = document.querySelector("#x-add-btn");
+  addBtn.onclick = function() {
+
+    if (no.value == "") {
+      window.alert("필수 입력 항목이 비어 있습니다.");
+      return;
+    }
+
+    fetch(`/poketmons/add?no=${no.value}&poketName=${poketName.value}&att=${att.value}&skill=${skill.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text);
+      });
+  };
+
+  var cancelBtn = document.querySelector("#x-cancel-btn");
+  cancelBtn.onclick = function() {
+    window.location.href = "index.html";
+  };
+</script>
+
+</body>
+</html>

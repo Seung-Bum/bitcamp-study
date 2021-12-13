@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>my1</title>
+</head>
+<body>
+<h1>포켓몬 상세</h1>
+
+<form>
+no*: <input id="x-no" type="text"><br>
+이름: <input id="x-name" type="text"><br>
+속성: <input id="x-att" type="text"><br>
+스킬: <input id="x-skill" type="text"><br>
+별표(*) 항목은 필수 입력입니다.<br>
+<button id="x-add-btn" type="button">등록</button>
+<button id="x-cancel-btn" type="button">취소</button>
+</form>
+
+<script type="text/javascript">
+  var no = document.querySelector("#x-no");
+  var poketName = document.querySelector("#x-name");
+  var att = document.querySelector("#x-att");
+  var skill = document.querySelector("#x-skill");
+
+  // 1) URL에서 쿼리스트링(query string)을 추출한다.
+  var arr = location.href.split("?");
+  console.log(arr);
+
+  if (arr.length == 1) {
+    alert("요청 형식이 옳바르지 않습니다.")
+    throw "URL 형식 오류!";
+  }
+
+  var qs = arr[1];
+  console.log(qs);
+
+  // 2) 쿼리 스트링에서 poketName 값을 추출한다.
+  var no = new URLSearchParams(qs);
+  var no = params.get("no");
+
+  if (no == null) {
+    alert("이메일 값이 없습니다.");
+    throw "파라미터 오류!";
+  }
+  console.log(no);
+
+  // 3) 서버에서 데이터 가져오기
+  fetch(`/contact/get?no=${no}`)
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(contact) {
+      var values = contact.split(",");
+
+      // 4) 연락처 상세 정보를 화면에 출력한다.
+      no.value = values[0];
+      poketName.value = values[1];
+      att.value = values[2];
+      skill.value = values[3];
+    });
+
+  var addBtn = document.querySelector("#x-add-btn");
+  addBtn.onclick = function() {
+
+    if (no.value == "") {
+      window.alert("필수 입력 항목이 비어 있습니다.");
+      return;
+    }
+
+    fetch(`/poketmons/add?no=${no.value}&poketName=${poketName.value}&att=${att.value}&skill=${skill.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text);
+      });
+  };
+
+  var cancelBtn = document.querySelector("#x-cancel-btn");
+  cancelBtn.onclick = function() {
+    window.location.href = "index.html";
+  };
+
+  // document.querySelector('#x-delete-btn').onclick = function() {
+  //   fetch(`/contact/delete?email=${email}`)
+  //     .then(function(response) {
+  //       return response.json();
+  //     })
+  //     .then(function(result) {
+  //       console.log(result)
+  //       location.href = "index.html";
+  //     });
+  // };
+</script>
+
+</body>
+</html>
