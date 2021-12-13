@@ -13,6 +13,7 @@ n o*: <input id="x-no" type="text"><br>
 속성: <input id="x-att" type="text"><br>
 스킬: <input id="x-skill" type="text"><br>
 별표(*) 항목은 필수 입력입니다.<br>
+번호는 중복하여 입력 할 수 없습니다.<br>
 <button id="x-add-btn" type="button">등록</button>
 <button id="x-cancel-btn" type="button">취소</button>
 </form>
@@ -23,9 +24,9 @@ n o*: <input id="x-no" type="text"><br>
   var att = document.querySelector("#x-att");
   var skill = document.querySelector("#x-skill");
 
+
   var addBtn = document.querySelector("#x-add-btn");
   addBtn.onclick = function() {
-
     if (no.value == "") {
       window.alert("필수 입력 항목이 비어 있습니다.");
       return;
@@ -36,8 +37,12 @@ n o*: <input id="x-no" type="text"><br>
         return response.text();
       })
       .then(function(text) {
-        console.log(text);
-        window.location.href = "index.html";
+        if (text == 0) {
+          window.location.href = "form.html";
+          alert("번호가 중복 됩니다.")
+        }else {
+          window.location.href = "index.html";
+        }
       });
   };
 

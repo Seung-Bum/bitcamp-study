@@ -21,6 +21,11 @@ public class My1_Controller {
   @RequestMapping("/poketmons/add")
   public Object add(String no, String poketName, String att, String skill) {
     String poketmon = no + "," + poketName + "," + att + "," + skill;
+    for (int i = 0; i < size; i++) {
+      if (poketmons[i].split(",")[0].equals(no)) {
+        return 0;
+      }
+    }
     poketmons[size++] = poketmon;
     return size;
   }
