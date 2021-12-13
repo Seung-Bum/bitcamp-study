@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>연락처</title>
+  <meta charset="utf-8">
+  <title>연락처</title>
 </head>
 <body>
+
 <h1>새 연락처</h1>
+
 <form>
-    이름:<input id="x-name" type="text"><br>
-    이메일:<input id="x-email" type="email"><br>
-    전화:<input id="x-tel" type="tel"><br>
-    회사:<input id="x-company" type="text"><br>
-    <button id="x-add-btn" type="button">추가</button>
-    <button id="x-cancel-btn" type="button">취소</button>
+이름*: <input id="x-name" type="text"><br>
+이메일*: <input id="x-email" type="text"><br>
+전화*: <input id="x-tel" type="text"><br>
+회사: <input id="x-company" type="text"><br>
+별표(*) 항목은 필수 입력입니다.<br>
+<button id="x-add-btn" type="button">등록</button>
+<button id="x-cancel-btn" type="button">취소</button>
 </form>
 
-
 <script type="text/javascript">
-var xName = document.querySelector("#x-name");
-var xEmail = document.querySelector("#x-email");
-var xTel = document.querySelector("#x-tel");
-var xCompany = document.querySelector("#x-company");
+  var xName = document.querySelector("#x-name");
+  var xEmail = document.querySelector("#x-email");
+  var xTel = document.querySelector("#x-tel");
+  var xCompany = document.querySelector("#x-company");
 
-document.querySelector("#x-add-btn").onclick = function() {
-  fetch(`/contact/add?name=${xName.value}&email=${xEmail.value}&tel=${xTel.value}&company=${xCompany.value}`)
-    .then(function(response) {
-      return response.text(); // 서버에서 보낸 데이터를 그냥 그대로 텍스트로 리턴해줘! JSON 문자열을 처리하지마
-    })
-    .then(function(result) {
-      console.log(result);
-      location.href = "index.html" //window 생략가능
-    })
-};
+  document.querySelector("#x-add-btn").onclick = function() {
+    if (xName.value == "" || xEmail.value == "" || xTel.value == "") {
+      window.alert("필수 입력 항목이 비어 있습니다.");
+      return;
+    }
 
-document.querySelector("#x-cancel-btn").onclick = function() {
-  //window 웹브라우저, location 현재 웹페이지 -> 현재 웹페이지를 index.html로 변경
-  window.location.href = "index.html";
-};
+    fetch(`/contact/add?name=${xName.value}&email=${xEmail.value}&tel=${xTel.value}&company=${xCompany.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text);
+        location.href = "index.html";
+      });
+  };
 
+  document.querySelector("#x-cancel-btn").onclick = function() {
+    window.location.href = "index.html";
+  };
 </script>
+
 </body>
 </html>
