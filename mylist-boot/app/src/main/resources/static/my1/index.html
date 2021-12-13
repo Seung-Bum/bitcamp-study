@@ -35,7 +35,7 @@ fetch("/poketmons/list")
   for (var poketmon of poketmons) {
     var values = poketmon.split(",");
     var tr = document.createElement("tr");
-    tr.innerHTML = `<td>${values[0]}</td>
+    tr.innerHTML = `<td><a href="view.html?no=${values[0]}">${values[0]}</a></td>
     <td>${values[1]}</td>
     <td>${values[2]}</td>
     <td>${values[3]}</td>`;

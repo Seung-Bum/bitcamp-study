@@ -28,11 +28,40 @@ public class My1_Controller {
   @RequestMapping("/poketmons/get")
   public Object get(String no) {
     for (int i = 0; i < size; i++) {
-      if (poketmons[i].split(",")[1].equals(no)) {
+      if (poketmons[i].split(",")[0].equals(no)) {
         return poketmons[i];
       }
     }
     return "not found";
   }
+
+  @RequestMapping("/poketmons/update")
+  public Object update(String no, String poketName, String att, String skill) {
+    String poketmon = no + "," + poketName + "," + att + "," + skill;
+    for (int i = 0; i < size; i++) {
+      if (poketmons[i].split(",")[0].equals(no)) {
+        poketmons[i] = poketmon;
+        return 1;
+      }
+    }
+    return 0;
+  }
+
+  @RequestMapping("/poketmons/delete")
+  public Object delete(String no) {
+    for (int i = 0; i < size; i++) {
+      if (poketmons[i].split(",")[0].equals(no)) {
+
+        // 현재 위치의 다음 항목에서 배열 끝까지 반복하며 앞으로 값을 당겨온다.
+        for (int j = i + 1; j < size; j++) {
+          poketmons[j-1] = poketmons[j]; 
+        }
+        size--;
+        return 1;
+      }
+    }
+    return 0;
+  }
+
 
 }
