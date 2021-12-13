@@ -25,7 +25,7 @@ public class My1_Controller {
     return size;
   }
 
-  @RequestMapping("/contact/get")
+  @RequestMapping("/poketmons/get")
   public Object get(String no) {
     for (int i = 0; i < size; i++) {
       if (poketmons[i].split(",")[1].equals(no)) {
