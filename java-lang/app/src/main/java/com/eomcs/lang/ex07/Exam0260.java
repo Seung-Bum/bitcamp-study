@@ -11,7 +11,7 @@ public class Exam0260 {
     }
   }
 
-  // 배열 파라미터
+  // 배열 파라미터(배열을 주소를 받겠다.)
   static void hello2(String[] names) {
     for (int i = 0; i < names.length; i++) {
       System.out.printf("%s님 반갑습니다.\n", names[i]);
