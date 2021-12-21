@@ -9,8 +9,8 @@
 <h1>연락처 상세</h1>
 
 <form>
-이름*: <input id="x-name" type="text"><br>
 이메일*: <input id="x-email" type="text" readonly><br>
+이름*: <input id="x-name" type="text"><br>
 전화*: <input id="x-tel" type="text"><br>
 회사: <input id="x-company" type="text"><br>
 별표(*) 항목은 필수 입력입니다.<br>
@@ -18,7 +18,6 @@
 <button id="x-delete-btn" type="button">삭제</button>
 <button id="x-cancel-btn" type="button">취소</button>
 </form>
-
 
 <script type="text/javascript">
 
@@ -52,16 +51,14 @@
   // 3) 서버에서 데이터 가져오기
   fetch(`/contact/get?email=${email}`)
     .then(function(response) {
-      return response.text();
+      return response.json();
     })
     .then(function(contact) {
-      var values = contact.split(",");
-
       // 4) 연락처 상세 정보를 화면에 출력한다.
-      xName.value = values[0];
-      xEmail.value = values[1];
-      xTel.value = values[2];
-      xCompany.value = values[3];
+      xName.value = contact.name;
+      xEmail.value = contact.email;
+      xTel.value = contact.tel;
+      xCompany.value = contact.company;
     });
 
   document.querySelector("#x-update-btn").onclick = function() {
@@ -84,14 +81,13 @@
     window.location.href = "index.html";
   };
 
-
-  document.querySelector('#x-delete-btn').onclick = function() {
+  document.querySelector("#x-delete-btn").onclick = function() {
     fetch(`/contact/delete?email=${email}`)
       .then(function(response) {
         return response.json();
       })
       .then(function(result) {
-        console.log(result)
+        console.log(result);
         location.href = "index.html";
       });
   };
