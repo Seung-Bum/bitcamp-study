@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>게시판</title>
+</head>
+<body>
+<h1>게시판</h1>
+<a href="form.html">게시글 작성</a>
+<table id="x-contact-table" border="1">
+<thead>
+  <tr>
+    <th>번호</th>
+    <th>제목</th>
+    <th>내용</th>
+    <th>조회수</th>
+    <th>작성일</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<script type="text/javascript">
+  var tbody = document.querySelector("#x-contact-table tbody")
+
+  fetch("/board/list")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(bbrs) {
+      console.log(bbrs);
+      for (var bbr of bbrs) {
+        var tr = document.createElement("tr");
+        tr.innerHTML = `<td><a href="view.html?number=${bbr.number}">${bbr.number}</a></td>
+        <td>${bbr.title}</td>
+        <td>${bbr.content}</td>
+        <td>${bbr.viewCount}</td>
+        <td>${bbr.createDate}</td>`;
+        tbody.appendChild(tr);
+      }
+    });
+</script>
+</body>
+</html>

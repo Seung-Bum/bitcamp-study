@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>게시글 작성</title>
+</head>
+<body>
+
+<h1>게시글 작성</h1>
+
+
+<!-- <p id="x-number">번호:</p> -->
+<form>
+제목*: <input id="x-title" type="text"><br>
+내용: <input id="x-content" type="text"><br>
+조회수: <input id="x-viewCount" type="text"><br>
+작성일: <input id="x-createDate" type="text"><br>
+별표(*) 항목은 필수 입력입니다.<br>
+<button id="x-add-btn" type="button">등록</button>
+<button id="x-cancel-btn" type="button">취소</button>
+</form>
+
+<script type="text/javascript">
+  // var xNumber = document.querySelector("#x-number");
+  var xTitle = document.querySelector("#x-title");
+  var xContent = document.querySelector("#x-content");
+  var xViewCount = document.querySelector("#x-viewCount");
+  var xCreateDate = document.querySelector("#x-createDate");
+  var xNumber = 0;
+
+  document.querySelector("#x-add-btn").onclick = function() {
+    if (xTitle.value == "") {
+      window.alert("필수 입력 항목이 비어 있습니다.");
+      return;
+    }
+
+    // xNumber.innerHTML = `번호: ${xNumCount}`;
+
+    //서버로 데이터 전송 후 index.html 이동
+    fetch(`/board/add?number=${xNumber}&title=${xTitle.value}&content=${xContent.value}&viewCount=${xViewCount.value}&createDate=${xCreateDate.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text);
+        location.href = "index.html";
+      });
+  };
+
+  document.querySelector("#x-cancel-btn").onclick = function() {
+    window.location.href = "index.html";
+  };
+</script>
+
+</body>
+</html>
