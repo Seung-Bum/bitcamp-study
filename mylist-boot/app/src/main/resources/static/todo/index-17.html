@@ -29,8 +29,10 @@
 <input type="text" id="x-title-input">
 
 <script type="text/javascript">
+  "use strict"
+
   var titleInput = document.querySelector("#x-title-input");
-  // titleInput.style["display"] = "none";
+  titleInput.style["display"] = "none";
 
   var tbody = document.querySelector("#x-todo-table tbody")
 
@@ -101,11 +103,28 @@
    titleSpan.style["display"] = "none";
    titleInput.value = titleSpan.innerHTML;
    titleTd.appendChild(titleInput);
+   titleInput.style["display"] = "";
  }
 
  titleInput.onkeyup = function(e) {
-   if (e.keyCode == 13 && titleInput.value != "") {
-     console.log("변경하자!")
+   var no = titleInput.parentNode.getAttribute("data-no");
+   var originTitle = titleInput.parentNode.querySelector("span").innerHTML;
+   if (e.keyCode == 13 && titleInput.value != "" && originTitle != titleInput.value) {
+     fetch(`/todo/update?index=${no}&title=${titleInput.value}`)
+       .then(function(response) {
+         return response.json();
+       })
+       .then(function(result) {
+         if (result == 0) {
+           window.alert("변경하지 못했습니다!");
+         } else {
+           console.log("변경했습니다.");
+           titleInput.parentNode.querySelector("span").innerHTML = titleInput.value;
+           titleInput.parentNode.querySelector("span").style["display"] = "";
+           titleInput.style["display"] = "none";
+           document.body.appendChild(titleInput);
+         }
+       });
    }
  };
 </script>

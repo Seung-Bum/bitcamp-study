@@ -50,8 +50,8 @@
         }
         tr.innerHTML = `<td><input type="checkbox" ${checkedOption} onchange="checkTodo(${i}, event.target.checked)"></td>
         <td data-no="${i}" ${titleTdOption}>${todoList[i].title}</td>
-        <td><button type="button" onclick="updateTodo(${i})">변경</td>
-        <td><button type="button" onclick="deleteTodo(${i})">삭제</td>`;
+        <td><button type="button" onclick="updateTodo(${i})">변경</button></td>
+        <td><button type="button" onclick="deleteTodo(${i})">삭제</button></td>`;
         tbody.appendChild(tr);
       }
     });
