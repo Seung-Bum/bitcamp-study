@@ -50,21 +50,14 @@ public class ArrayList3 {
   }
 
   static Object set(int index, Object obj) {
+    // obj는 새로운 값이 저장된 board이다.
     if (index < 0 || index >= size) { // 값이 저장된 위치가 무효한 인덱스라면 
       return null;
     }
     Object old = list[index];
-    list[index] = obj;
+    list[index] = obj; // 기존 배열 덮어씀
     return old;
   }
 }
-
-
-
-
-
-
-
-
 
 

@@ -2,21 +2,11 @@ package com.eomcs.mylist;
 
 public class Board {
 
-  static int count = 0;
-
-  int number;
   String title;
   String content;
-  int viewCount;
+  int viewCount = 1;
   java.sql.Date createdDate;
 
-  public int getNumber() {
-    return number;
-  }
-  public void setNumber(int number) {
-    count++;
-    this.number = count;
-  }
   public String getTitle() {
     return title;
   }
@@ -44,8 +34,8 @@ public class Board {
 
   @Override
   public String toString() {
-    return "Board [number=" + number + ", title=" + title + ", content=" + content + ", viewCount="
-        + viewCount + ", createdDate=" + createdDate + "]";
+    return "Board [title=" + title + ", content=" + content + ", viewCount=" + viewCount
+        + ", createdDate=" + createdDate + "]";
   }
 
 }
