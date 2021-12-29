@@ -2,24 +2,26 @@ package com.eomcs.mylist;
 
 public class ArrayList {
 
-  static Object[] list = new Object[5];
-  static int size = 0;
+  // 인스턴스 필드
+  // => 인스턴스 필드는 new 명령을 통해 생성한다.
+  Object[] list = new Object[5];
+  int size = 0;
 
-  static void add(Object obj) {
-    if (size == list.length) { 
-      list = grow();
+  static void add(ArrayList that, Object obj) {
+    if (that.size == that.list.length) { 
+      that.list = grow(that);
     }
-    list[size++] = obj;
+    that.list[that.size++] = obj;
   }
 
-  static Object[] grow() {
-    Object[] arr = new Object[newLength()];
-    copy(list, arr);
+  static Object[] grow(ArrayList that) {
+    Object[] arr = new Object[newLength(that)];
+    copy(that.list, arr);
     return arr;
   }
 
-  static int newLength() {
-    return list.length + (list.length >> 1);
+  static int newLength(ArrayList that) {
+    return that.list.length + (that.list.length >> 1);
   }
 
   static void copy(Object[] source, Object[] target) {
@@ -32,29 +34,32 @@ public class ArrayList {
     }
   }
 
-  static Object[] toArray() {
-    Object[] arr = new Object[size]; 
-    for (int i = 0; i < size; i++) { 
-      arr[i] = list[i]; 
+  static Object[] toArray(ArrayList that) {
+    Object[] arr = new Object[that.size]; 
+    for (int i = 0; i < that.size; i++) { 
+      arr[i] = that.list[i]; 
     }
     return arr; 
   }
 
-  static Object remove(int index) {
-    Object old = list[index];
-    for (int i = index + 1; i < size; i++) {
-      list[i - 1] = list[i];
+  static Object remove(ArrayList that, int index) {
+    if (index < 0 || index >= that.size) { // 값이 저장된 위치가 무효한 인덱스라면 
+      return null;
     }
-    size--;
+    Object old = that.list[index];
+    for (int i = index + 1; i < that.size; i++) {
+      that.list[i - 1] = that.list[i];
+    }
+    that.size--;
     return old;
   }
 
-  static Object set(int index, Object obj) {
-    if (index < 0 || index >= size) { // 값이 저장된 위치가 무효한 인덱스라면 
+  static Object set(ArrayList that, int index, Object obj) {
+    if (index < 0 || index >= that.size) { // 값이 저장된 위치가 무효한 인덱스라면 
       return null;
     }
-    Object old = list[index];
-    list[index] = obj;
+    Object old = that.list[index];
+    that.list[index] = obj;
     return old;
   }
 }

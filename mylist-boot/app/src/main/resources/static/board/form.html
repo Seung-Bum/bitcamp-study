@@ -2,18 +2,27 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>게시글</title>
+  <title>게시판</title>
+  <style>
+		textarea {
+			width: 100%;
+			height: 200px;
+			padding: 10px;
+			box-sizing: border-box;
+			border: solid 2px #1E90FF;
+			border-radius: 5px;
+			font-size: 16px;
+			resize: both;
+		}
+	</style>
 </head>
 <body>
 
 <h1>게시글 작성</h1>
 
-
 <form>
 제목*: <input id="x-title" type="text"><br>
-내용: <textarea id="x-content" cols="60" rows="10"></textarea><br>
-<!-- 조회수: <input id="x-viewCount" type="text"><br>
-작성일: <input id="x-createDate" type="text"><br> -->
+내용:* <textarea id="x-content"></textarea><br>
 별표(*) 항목은 필수 입력입니다.<br>
 <button id="x-add-btn" type="button">등록</button>
 <button id="x-cancel-btn" type="button">취소</button>
@@ -22,8 +31,6 @@
 <script type="text/javascript">
   var xTitle = document.querySelector("#x-title");
   var xContent = document.querySelector("#x-content");
-  // var xViewCount = document.querySelector("#x-viewCount");
-  // var xCreateDate = document.querySelector("#x-createDate");
 
   document.querySelector("#x-add-btn").onclick = function() {
     if (xTitle.value == "" || xContent.value == "") {
@@ -31,7 +38,6 @@
       return;
     }
 
-    //서버로 데이터 전송 후 index.html 이동
     fetch(`/board/add?title=${xTitle.value}&content=${xContent.value}`)
       .then(function(response) {
         return response.text();

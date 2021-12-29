@@ -1,11 +1,11 @@
 package com.eomcs.mylist;
 
 public class Board {
-
   String title;
+  int viewCount;
   String content;
-  int viewCount = 1;
   java.sql.Date createdDate;
+
 
   public String getTitle() {
     return title;
@@ -13,17 +13,17 @@ public class Board {
   public void setTitle(String title) {
     this.title = title;
   }
-  public String getContent() {
-    return content;
-  }
-  public void setContent(String content) {
-    this.content = content;
-  }
   public int getViewCount() {
     return viewCount;
   }
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
+  }
+  public String getContent() {
+    return content;
+  }
+  public void setContent(String content) {
+    this.content = content;
   }
   public java.sql.Date getCreatedDate() {
     return createdDate;
@@ -34,7 +34,7 @@ public class Board {
 
   @Override
   public String toString() {
-    return "Board [title=" + title + ", content=" + content + ", viewCount=" + viewCount
+    return "Contact [title=" + title + ", viewCount=" + viewCount + ", content=" + content
         + ", createdDate=" + createdDate + "]";
   }
 
