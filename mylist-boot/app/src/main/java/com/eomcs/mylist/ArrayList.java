@@ -7,59 +7,59 @@ public class ArrayList {
   Object[] list = new Object[5];
   int size = 0;
 
-  static void add(ArrayList that, Object obj) {
-    if (that.size == that.list.length) { 
-      that.list = grow(that);
+  void add(Object obj) {
+    if (this.size == this.list.length) { 
+      this.list = this.grow();
     }
-    that.list[that.size++] = obj;
+    this.list[this.size++] = obj;
   }
 
-  static Object[] grow(ArrayList that) {
-    Object[] arr = new Object[newLength(that)];
-    copy(that.list, arr);
+  Object[] grow() {
+    Object[] arr = new Object[this.newLength()];
+    this.copy(arr);
     return arr;
   }
 
-  static int newLength(ArrayList that) {
-    return that.list.length + (that.list.length >> 1);
+  int newLength() {
+    return this.list.length + (this.list.length >> 1);
   }
 
-  static void copy(Object[] source, Object[] target) {
-    int length = source.length;
-    if (target.length < source.length) {
+  void copy(Object[] target) {
+    int length = this.list.length;
+    if (target.length < this.list.length) {
       length = target.length;
     }
     for (int i = 0; i < length; i++) {
-      target[i] = source[i];
+      target[i] = this.list[i];
     }
   }
 
-  static Object[] toArray(ArrayList that) {
-    Object[] arr = new Object[that.size]; 
-    for (int i = 0; i < that.size; i++) { 
-      arr[i] = that.list[i]; 
+  Object[] toArray() {
+    Object[] arr = new Object[this.size]; 
+    for (int i = 0; i < this.size; i++) { 
+      arr[i] = this.list[i]; 
     }
     return arr; 
   }
 
-  static Object remove(ArrayList that, int index) {
-    if (index < 0 || index >= that.size) { // 값이 저장된 위치가 무효한 인덱스라면 
+  Object remove(int index) {
+    if (index < 0 || index >= this.size) { // 값이 저장된 위치가 무효한 인덱스라면 
       return null;
     }
-    Object old = that.list[index];
-    for (int i = index + 1; i < that.size; i++) {
-      that.list[i - 1] = that.list[i];
+    Object old = this.list[index];
+    for (int i = index + 1; i < this.size; i++) {
+      this.list[i - 1] = this.list[i];
     }
-    that.size--;
+    this.size--;
     return old;
   }
 
-  static Object set(ArrayList that, int index, Object obj) {
-    if (index < 0 || index >= that.size) { // 값이 저장된 위치가 무효한 인덱스라면 
+  Object set(int index, Object obj) {
+    if (index < 0 || index >= this.size) { // 값이 저장된 위치가 무효한 인덱스라면 
       return null;
     }
-    Object old = that.list[index];
-    that.list[index] = obj;
+    Object old = this.list[index];
+    this.list[index] = obj;
     return old;
   }
 }
