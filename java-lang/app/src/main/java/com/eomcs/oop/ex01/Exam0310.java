@@ -20,9 +20,11 @@ public class Exam0310 {
     // => s1과 s2는 같은 메모리를 가리킨다.
     Score s2 = s1;
 
+    s2.name = "임꺽정";
     s1.name = "홍길동";
 
     // s1이 가리키는 메모리는 s2를 사용하여 접근할 수 있다.
     System.out.println(s2.name);
+    System.out.println(s1.name);
   }
 }
