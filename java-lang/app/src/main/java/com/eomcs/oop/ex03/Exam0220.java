@@ -3,6 +3,7 @@ package com.eomcs.oop.ex03;
 
 public class Exam0220 {
   static class A {
+
     int value;
 
     static void m1() {
@@ -24,6 +25,7 @@ public class Exam0220 {
     }
 
     void m4(int value) {
+      // 가장 가까운것을 가리킴
       // 로컬 변수의 이름이 인스턴스 이름과 같을 경우 
       // this를 붙이지 않으면 로컬 변수를 가리킨다.
       value = 200; // 로컬 변수이다.
