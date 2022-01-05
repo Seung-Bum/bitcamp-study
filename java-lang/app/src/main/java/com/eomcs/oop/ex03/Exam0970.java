@@ -2,7 +2,7 @@
 package com.eomcs.oop.ex03;
 
 public class Exam0970 {
-
+  // 이런식으로 쓰지말라
   static class Monitor {
 
     int bright; // 밝기 (0% ~ 100%)
