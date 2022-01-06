@@ -10,7 +10,7 @@ public class Exam0114 {
     String s2 = "Hello";
 
     // intern()
-    // - 지정된 String 객체를 상수풀에서 찾는다.
+    // - String 객체에 들어있는 문자열과 동일한 문자열을 갖고 있는 String 객체를 상수풀에서 찾는다.
     // - 있으면 그 String 객체의 주소를 리턴한다.
     // - 없으면 상수풀에 String 객체를 생성한 후 그 주소를 리턴한다.
     String s3 = s1.intern();
