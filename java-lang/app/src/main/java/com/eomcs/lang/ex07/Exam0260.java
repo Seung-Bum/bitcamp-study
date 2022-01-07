@@ -11,7 +11,7 @@ public class Exam0260 {
     }
   }
 
-  // 배열 파라미터(배열을 주소를 받겠다.)
+  // 배열 파라미터
   static void hello2(String[] names) {
     for (int i = 0; i < names.length; i++) {
       System.out.printf("%s님 반갑습니다.\n", names[i]);
@@ -27,7 +27,6 @@ public class Exam0260 {
 
     // => 또는 다음과 같이 배열에 담아서 전달할 수도 있다.
     String[] arr = {"김구", "안중근", "윤봉길", "유관순"};
-
     hello(arr);
     System.out.println("-------------------");
 

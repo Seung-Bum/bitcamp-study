@@ -1,6 +1,6 @@
 package com.eomcs.lang.ex04;
 
-//# 배열 - 배열이 필용할 때: 같은 종류의 메모리를 많이 다룰 경우 
+//# 배열 - 배열이 필요할 때: 같은 종류의 메모리를 많이 다룰 경우 
 //
 public class Exam0521 {
   public static void main(String[] args) {
@@ -33,7 +33,9 @@ public class Exam0521 {
     for (int item : arr1) {
       sum2 = sum2 + item;
     }
+
     System.out.println(sum2);
+
     // 어? 배열 보다 위에 있는 코드가 편한데요?
     // => 만명의 국어 점수를 담을 변수를 선언하고 합계를 구한다고 생각해 보자. 
   }

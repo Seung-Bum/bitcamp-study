@@ -1,13 +1,5 @@
 #
-<<<<<<< HEAD
-#Fri Dec 24 09:25:28 KST 2021
-=======
-<<<<<<< HEAD
-#Fri Dec 24 15:14:50 KST 2021
-=======
-#Thu Dec 23 08:46:33 KST 2021
->>>>>>> 32162c4501117e55dd6ec9a059e49b3cdc44d152
->>>>>>> f16b98e33fdb5c595731ffabcbbae26bae3b1716
+#Fri Jan 07 23:22:40 KST 2022
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=11

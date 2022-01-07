@@ -16,7 +16,6 @@ public class Exam0250 {
 
     System.out.println(c.get(5));
 
-
     // 인스턴스 메서드 활용
     System.out.println(c.get(1)); // 년도
     System.out.println(c.get(2) + 1); // 월(0 ~ 11)

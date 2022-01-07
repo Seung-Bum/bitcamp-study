@@ -7,7 +7,7 @@ public class Exam0161 {
   static class Member {
     String id;
     String password;
-    int type; // 0: 손님, 1: 회원, 2: 관리자
+    int type; 
   }
 
   public static void main(String[] args) {

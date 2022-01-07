@@ -19,3 +19,8 @@ public class Exam0461 {
     System.out.println(sum(19000, 0, 0, 0, 0, 0));
   }
 }
+
+
+
+
+

@@ -47,7 +47,7 @@ public class Exam0130 {
     short s3;
     s3 = s1; // OK!
     s3 = s2; // OK!
-    //    s3 = s1 + s2; // 컴파일 오류!
+    //        s3 = (int)s1 + (int)s2; // 컴파일 오류!
 
     int s4 = s1 + s2;
     System.out.println(s4);

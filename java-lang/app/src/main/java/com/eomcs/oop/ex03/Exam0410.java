@@ -48,7 +48,7 @@ public class Exam0410 {
 
     Score s3 = new Score();
 
-    // s3.Score(); 생성자는 따로 호출할 수 없다.
+    //    s3.Score(); // 생성자는 따로 호출할 수 없다!
   }
 }
 

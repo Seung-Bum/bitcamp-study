@@ -16,9 +16,7 @@ public class Exam0110 {
     String s2 = new String("Hello");
 
     // 인스턴스가 같은지를 비교해보면,
-    System.out.println(s1 == s2); 
-    // false => 서로 다른 인스턴스이다.
-    // 문자열 비교가 아닌 주소값을 비교한 것이다.
+    System.out.println(s1 == s2); // false => 서로 다른 인스턴스이다.
   }
 }
 
