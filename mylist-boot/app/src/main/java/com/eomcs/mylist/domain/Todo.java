@@ -8,6 +8,28 @@ public class Todo {
     System.out.println("Todo() 호출됨!");
   }
 
+  public Todo(String csvStr) {
+    // 예) csvStr => "제목, true"
+
+    String[] values = csvStr.split(","); // 예) ["제목", "true"]
+    this.setTitle(values[0]); // 배열에 들어 있는 각 항목을 객체의 필드에 저장한다.
+    this.setDone(Boolean.valueOf(values[1]));
+
+    System.out.println("Todo(String csvStr) 호출됨!");
+  }
+
+  public static Todo valueOf(String csvStr) {
+    // 예) csvStr => "제목, true"
+
+    String[] values = csvStr.split(",");
+
+    Todo todo = new Todo();
+    todo.setTitle(values[0]);
+    todo.setDone(Boolean.valueOf(values[1]));
+
+    return todo;
+  }
+
   public String getTitle() {
     return title;
   }
