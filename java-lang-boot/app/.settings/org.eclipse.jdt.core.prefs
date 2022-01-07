@@ -1,5 +1,9 @@
 #
+<<<<<<< HEAD
 #Mon Jan 03 17:41:22 KST 2022
+=======
+#Fri Jan 07 08:53:13 KST 2022
+>>>>>>> 946ae3f4cce8218dc0499f666c2e9ccf007f41b9
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=11

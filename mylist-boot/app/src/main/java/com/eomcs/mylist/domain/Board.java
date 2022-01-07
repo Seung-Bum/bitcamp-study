@@ -1,11 +1,51 @@
 package com.eomcs.mylist.domain;
 
+import java.sql.Date;
+
 public class Board {
   String title;
-  int viewCount;
   String content;
+  int viewCount;
   java.sql.Date createdDate;
 
+  public Board() {
+    System.out.println("Board() 호출됨!");
+  }
+
+  // Board 생성자
+  public Board(String csvStr) {
+    // 예) csvStr => "제목,내용,조회수,등록일"
+
+    String[] values = csvStr.split(","); 
+    this.setTitle(values[0]); 
+    this.setContent(values[2]);
+    this.setViewCount(Integer.valueOf(values[1]));
+    this.setCreatedDate(Date.valueOf(values[3]));
+  }
+
+  public static Board valueOf(String csvStr) {
+    // 예) csvStr => "제목,내용,조회수,등록일"
+
+    String[] values = csvStr.split(",");
+
+    Board board = new Board();
+    board.setTitle(values[0]); 
+    board.setContent(values[2]);
+    board.setViewCount(Integer.valueOf(values[1]));
+    board.setCreatedDate(Date.valueOf(values[3]));
+
+    return board;
+  }
+
+
+  // Board 객체에서 메모장으로 보낼때 사용
+  public String toCsvString() {
+    return String.format("%s,%s,%s,%s", 
+        this.getTitle(), 
+        this.getContent(), 
+        this.getViewCount(), 
+        this.getCreatedDate());
+  }
 
   public String getTitle() {
     return title;

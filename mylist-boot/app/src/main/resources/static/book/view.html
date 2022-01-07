@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>독서관리 앱</title>
+</head>
+<body>
+
+<h1>도서 상세정보</h1>
+
+<form>
+  제목*: <input id="x-title" type="text"><br>
+  작가*: <input id="x-author" type="text"><br>
+  출판사*: <input id="x-press" type="text"><br>
+  페이지 수*: <input id="x-page" type="text"><br>
+  가격*: <input id="x-price" type="text"><br>
+  feed:* <textarea id="x-feed"></textarea><br>
+별표(*) 항목은 필수 입력입니다.<br>
+<button id="x-update-btn" type="button">변경</button>
+<button id="x-delete-btn" type="button">삭제</button>
+<button id="x-cancel-btn" type="button">취소</button>
+</form>
+
+<script type="text/javascript">
+
+  // 1) URL에서 쿼리스트링(query string)을 추출한다.
+  // view.html에 들어올때 index로 들어온다. 해당 index가 필요함
+  var arr = location.href.split("?");
+  console.log(arr);
+
+  if (arr.length == 1) {
+    alert("요청 형식이 옳바르지 않습니다.")
+    throw "URL 형식 오류!";
+  }
+
+  var qs = arr[1];
+  console.log(qs);
+
+  // 2) 쿼리 스트링에서 index값을 추출한다.
+  var params = new URLSearchParams(qs);
+  var index = params.get("index");
+
+  if (index == null) {
+    alert("해당 게시글이 없습니다.");
+    throw "파라미터 오류!";
+  }
+  console.log(index);
+
+  var xTitle = document.querySelector("#x-title");
+  var xFeed = document.querySelector("#x-feed");
+  var xAuthor = document.querySelector("#x-author");
+  var xPress = document.querySelector("#x-press");
+  var xPage = document.querySelector("#x-page");
+  var xPrice = document.querySelector("#x-price");
+
+  // 3) 서버에서 데이터 가져오기
+  fetch(`/book/get?index=${index}`)
+    .then(function(response) {
+      return response.json(); //response.text();
+    })
+    .then(function(book) {
+      // 4) 도서 상세 정보를 화면에 출력한다.
+      xTitle.value = book.title;
+      xFeed.value = book.feed;
+      xAuthor.value = book.author;
+      xPress.value = book.press;
+      xPage.value = book.page;
+      xPrice.value = book.price;
+    });
+
+
+  document.querySelector("#x-update-btn").onclick = function() {
+    if (xTitle.value == "" || xFeed.value == "" || xAuthor.value == "" || xPress.value == "" || xPage.value == "" || xPrice.value == "") {
+      window.alert("입력 항목이 비어 있습니다.");
+      return;
+    }
+
+    fetch(`/book/update?index=${index}&title=${xTitle.value}&feed=${xFeed.value}&author=${xAuthor.value}&press=${xPress.value}&page=${xPage.value}&price=${xPrice.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text);
+        location.href = "index.html";
+      });
+  };
+
+  document.querySelector("#x-cancel-btn").onclick = function() {
+    window.location.href = "index.html";
+  };
+
+  document.querySelector("#x-delete-btn").onclick = function() {
+    fetch(`/book/delete?index=${index}`)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(result) {
+        console.log(result);
+        location.href = "index.html";
+      });
+  };
+
+</script>
+
+</body>
+</html>
