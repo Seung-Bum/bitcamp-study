@@ -43,9 +43,11 @@ public class Contact {
     return contact;
   }
 
+
   public Contact() {
     System.out.println("Contact() 호출됨!");
   }
+
 
   // 인스턴스변수를 쓴다면 static을 빼야함
   // => 인스턴스 메서드 : 특정 인스턴스를 사용한다면 인스턴스 메서드로 만들라!

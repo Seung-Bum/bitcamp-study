@@ -18,6 +18,7 @@ public class Todo {
     System.out.println("Todo(String csvStr) 호출됨!");
   }
 
+
   public static Todo valueOf(String csvStr) {
     // 예) csvStr => "제목, true"
 
@@ -28,6 +29,13 @@ public class Todo {
     todo.setDone(Boolean.valueOf(values[1]));
 
     return todo;
+  }
+
+  // Board 객체에서 메모장으로 보낼때 사용
+  public String toCsvString() {
+    return String.format("%s,%s", 
+        this.getTitle(), 
+        this.isDone());
   }
 
   public String getTitle() {

@@ -1,10 +1,9 @@
 package com.eomcs.mylist.controller;
 
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.sql.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.io.FileWriter2;
 import com.eomcs.mylist.domain.Board;
 import com.eomcs.util.ArrayList;
 
@@ -15,19 +14,15 @@ public class BoardController {
 
   public BoardController() throws Exception {
     System.out.println("BoardController() 호출됨!");
-    FileReader in = new FileReader("boards.csv");
 
-    StringBuilder buf = new StringBuilder();
-    int c;
-    while ((c = in.read()) != -1) {
-      if (c == '\n') {
-        boardList.add(Board.valueOf(buf.toString())); 
-        buf.setLength(0); 
-      } else { 
-        buf.append((char) c);
-      }
+    com.eomcs.io.FileReader2 in = new com.eomcs.io.FileReader2("boards.csv");
+
+    String line;
+
+    while ((line = in.readLine()).length() != 0) { // 빈 줄을 리턴 받았으면 읽기 종료
+      boardList.add(Board.valueOf(line)); 
+      // 파일에서 읽은 CSV 데이터로 객체를 초기화시킨후 목록에 등록한다.
     }
-
     in.close();
   }
 
@@ -78,14 +73,13 @@ public class BoardController {
 
   @RequestMapping("/board/save")
   public Object save() throws Exception {
-    FileWriter out = new FileWriter("boards.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 생성된다.
+    FileWriter2 out = new FileWriter2("boards.csv"); // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 생성된다.
 
     Object[] arr = boardList.toArray();
     for (Object obj : arr) {
       Board board = (Board) obj;
-      out.write(board.toCsvString() + "\n");
+      out.println(board.toCsvString());
     }
-
     out.close();
     return arr.length;
   }
