@@ -12,6 +12,10 @@ public class Sedan extends Car {
   public boolean sunroof;
   public boolean auto;
 
+  public Sedan() {
+    System.out.println("sedan을 제작합니다.");
+  };
+
   public Sedan(String model, String maker, int capacity,
       boolean sunroof, boolean auto) {
     this.model = model;
