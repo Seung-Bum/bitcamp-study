@@ -11,6 +11,14 @@ package com.eomcs.oop.ex05.n;
 public class Exam01 {
 
   public static void main(String[] args) {
+    Sedan sedan = new Sedan();
+    sedan.start();
+    sedan.run();
+
+    Truck truck = new Truck();
+    truck.start();
+    truck.run();
+
   }
 
 }

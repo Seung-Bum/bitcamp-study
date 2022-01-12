@@ -2,9 +2,9 @@ package com.eomcs.oop.ex05.l;
 
 public class Car {
 
-  public Car() {
-    super();
-  }
+  //  public Car() {
+  //    super();
+  //  }
 
   public void start() {
     System.out.println("시동 건다!");

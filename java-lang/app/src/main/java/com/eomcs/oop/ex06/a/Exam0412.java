@@ -10,7 +10,7 @@ public class Exam0412 {
   // => 즉 Sedan 객체와 Truck 객체를 모두 가리킬 수 있는
   //    상위 클래스의 레퍼런스를 선언하면 된다.
   //
-  public static void printCar(Car car) {
+  public static void printCar(Car car) { // 파라미터 타입이 Car이다
     System.out.printf("모델명: %s\n", car.model);
     System.out.printf("cc: %d\n", car.cc);
     System.out.println("-------------------------");

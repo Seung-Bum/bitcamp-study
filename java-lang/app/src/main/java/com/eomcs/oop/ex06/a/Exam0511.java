@@ -12,7 +12,9 @@ public class Exam0511 {
     //
     // 클래스명.class
     // => 클래스 정보를 갖고 있는 스태틱 변수이다.
-    //
+    // => 빌트인 변수
+    // => 모든 인스턴스는 클래스정보를 가지고 있다.
+    // 
     System.out.println(v.getClass() == Sedan.class);
     System.out.println(v.getClass() == Car.class);
     System.out.println(v.getClass() == Vehicle.class);

@@ -5,6 +5,7 @@ public class Exam0610 {
 
   static class Car {}
   static class Sedan extends Car {}
+  static class Truck extends Car {}
   static class Tico extends Sedan {}
 
   static class CarFactory {
@@ -16,6 +17,7 @@ public class Exam0610 {
   static class SedanFactory extends CarFactory {
     // 오버라이딩 메서드의 리턴 타입은 
     // 서브 클래스도 가능하다.
+    // 슈퍼 클래스 리턴 X
     @Override
     Sedan create() {
       return new Sedan();
@@ -25,6 +27,7 @@ public class Exam0610 {
   static class TicoFactory extends SedanFactory {
     // 오버라이딩 메서드의 리턴 타입은 
     // 서브 클래스도 가능하다.
+    // 슈퍼 클래스 리턴 X
     @Override
     Tico create() {
       return new Tico();

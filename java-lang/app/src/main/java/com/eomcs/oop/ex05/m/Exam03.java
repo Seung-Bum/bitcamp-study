@@ -12,6 +12,7 @@ public class Exam03 {
     // 이 메서드의 리턴 값은
     // Truck 인스턴스 (주소) 이거나
     // Truck의 하위 클래스의 인스턴스 (주소) 이다.
+
     return new Truck();
   }
 
