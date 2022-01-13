@@ -1,8 +1,11 @@
 package com.eomcs.mylist.controller;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.eomcs.io.FileWriter2;
 import com.eomcs.mylist.domain.Contact;
 import com.eomcs.util.ArrayList;
 
@@ -25,12 +28,11 @@ public class ContactController {
     contactList = new ArrayList();
     System.out.println("ContactController() 호출됨!");
 
-    // import해도 되지만 명시하기위해 경로 적어줌
-    com.eomcs.io.FileReader2 in = new com.eomcs.io.FileReader2("contacts.csv");
+    BufferedReader in = new BufferedReader(new FileReader("contacts.csv"));
 
     String line;
 
-    while ((line = in.readLine()).length() != 0) { // 빈 줄을 리턴 받았으면 읽기 종료
+    while ((line = in.readLine()) != null) {  // readLine()이 null을 리턴한다면 파일을 다 읽었다는 것이다.
       contactList.add(Contact.valueOf(line)); 
       // 파일에서 읽은 CSV 데이터로 객체를 초기화시킨후 목록에 등록한다.
     }
@@ -81,7 +83,7 @@ public class ContactController {
 
   @RequestMapping("/contact/save")
   public Object save() throws Exception {
-    FileWriter2 out = new FileWriter2("contacts.csv"); // 따로 경로를 지정하지 않으면 프로젝트 폴더에 파일이 생성된다.
+    PrintWriter out = new PrintWriter(new FileWriter("contacts.csv")); // 따로 경로를 지정하지 않으면 프로젝트 폴더에 파일이 생성된다.
 
     // 저장은 contactList에 있는 연락처들만 저장한다.
     Object[] arr = contactList.toArray();

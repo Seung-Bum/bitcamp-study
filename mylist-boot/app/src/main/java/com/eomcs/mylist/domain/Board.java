@@ -74,10 +74,10 @@ public class Board {
     this.createdDate = createdDate;
   }
 
-  @Override
-  public String toString() {
-    return "Contact [title=" + title + ", viewCount=" + viewCount + ", content=" + content
-        + ", createdDate=" + createdDate + "]";
-  }
+  //  @Override
+  //  public String toString() {
+  //    return "Contact [title=" + title + ", viewCount=" + viewCount + ", content=" + content
+  //        + ", createdDate=" + createdDate + "]";
+  //  }
 
 }
