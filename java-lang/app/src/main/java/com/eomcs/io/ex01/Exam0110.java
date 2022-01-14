@@ -22,6 +22,8 @@ public class Exam0110 {
     System.out.printf("절대경로: %s\n", currentDir.getAbsolutePath());
     System.out.printf("계산된 절대경로: %s\n", currentDir.getCanonicalPath());
 
+    double k = (double)currentDir.getTotalSpace() / 1024;
+    System.out.printf("총크기: %f k \n", k);
     System.out.printf("총크기: %d\n", currentDir.getTotalSpace());
     System.out.printf("남은크기: %d\n", currentDir.getFreeSpace());
     System.out.printf("가용크기: %d\n", currentDir.getUsableSpace());
