@@ -2,19 +2,19 @@ package com.eomcs.oop.ex05.x7;
 
 public class SUV extends Car {
 
-  boolean enabled4wd;
+  boolean enalbled4wd;
 
   @Override
   public void run() {
-    System.out.println("SUV 출발");
+    if (enalbled4wd) {
+      System.out.println("SUV RUN: 강력한 파워");
+    } else {
+      System.out.println("SUV RUN: 그냥 달림");
+    }
   }
 
-  public void active4wd() {
-    if(enabled4wd) {
-      System.out.println("강력한 SUV 출발");
-    } else {
-      this.run();
-    }
+  public void active4wd(boolean enable) {
+    this.enalbled4wd = enable;
   }
 
 }
