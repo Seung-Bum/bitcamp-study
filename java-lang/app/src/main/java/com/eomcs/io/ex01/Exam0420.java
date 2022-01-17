@@ -7,7 +7,7 @@ public class Exam0420 {
 
   public static void main(String[] args) throws Exception {
     // 삭제할 파일의 경로 설정
-    File file = new File("temp2/a/test.txt");
+    File file = new File("temp1/a/test.txt");
 
     if (file.delete()) { // 파일 삭제
       System.out.println("test.txt 파일을 삭제하였습니다.");
