@@ -7,7 +7,7 @@ public class Exam0410 {
 
   public static void main(String[] args) throws Exception {
     // 생성할 파일의 경로 설정
-    File file = new File("temp2/a/test.txt");
+    File file = new File("temp2/a/test.txt"); // 0  bytes
 
     if (file.createNewFile()) { // 파일 생성
       System.out.println("test.txt 파일을 생성하였습니다.");

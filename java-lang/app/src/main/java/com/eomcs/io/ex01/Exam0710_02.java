@@ -19,15 +19,15 @@ public class Exam0710_02 {
     // settings.gradle
     // Hello.java
     // ...
-    
+
     File dir = new File(".");
     System.out.println(dir.getCanonicalPath());
-    
+
     printList(dir);
   }
 
   static void printList(File dir) {
-    
+
   }
 }
 
