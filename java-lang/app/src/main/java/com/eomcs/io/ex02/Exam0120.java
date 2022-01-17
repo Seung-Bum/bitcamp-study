@@ -17,9 +17,8 @@ public class Exam0120 {
     // => 이유?
     //    0 ~ 255까지의 값을 읽기 때문이다.
     //    byte는 -128 ~ 127까지의 값만 저장한다.
-    int b = in.read(); // 읽은 값은 0x4d 이다.
+    int b = in.read(); // 읽은 값은 0x4d 이다. 0x값을 잘라줌
     System.out.printf("%02x\n", b);
-
     System.out.printf("%02x\n", in.read());
     System.out.printf("%02x\n", in.read());
     System.out.printf("%02x\n", in.read());
