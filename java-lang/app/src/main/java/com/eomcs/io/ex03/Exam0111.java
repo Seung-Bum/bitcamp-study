@@ -11,6 +11,7 @@ public class Exam0111 {
 
     // 1) 출력 스트림 객체를 생성할 때  문자 집합을 지정하면 
     //    UCS2 문자열을 해당 문자집합으로 인코딩 한다.
+    //    charset 팩토리 메서드 패턴으로 만들어 졌다.
     Charset charset = Charset.forName("EUC-KR");
     FileWriter out = new FileWriter("temp/test2.txt", charset);
 

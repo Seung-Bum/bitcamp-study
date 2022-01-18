@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream;
 public class Exam0310 {
 
   public static void main(String[] args) throws Exception {
-    byte[] buf = {
+    byte[] buf = {// 한사람의 멤버 정보
         0x0b, 0x41, 0x42, (byte) 0xea, (byte) 0xb0, (byte) 0x80, (byte) 0xea, (byte) 0xb0,
         (byte) 0x81, (byte) 0xea, (byte) 0xb0, (byte) 0x84, 0x00, 0x00, 0x00, 0x1b, 0x01};
 

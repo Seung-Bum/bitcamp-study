@@ -19,13 +19,16 @@ public class Exam0110 {
     // 2) 문자 출력하기
     // - JVM은 문자 데이터를 다룰 때 UCS2(UTF16BE, 2바이트) 유니코드를 사용한다.
     // - character stream 클래스 FileWriter는 문자 데이터를 출력할 때
-    //   UCS2 코드를 OS의 기본 character set 코드로 변환하여 출력한다.
-    //
+    //   UCS2 코드를 JVM 환경 변수 file.encoding에 설정된 character set 코드로 변환하여 출력한다.
+    //   JVM을 실행할때 -Dfile.endoing=문자집합 옵션을 사용하여 기본문자 집합을 설정한다.
+    //   만약 file.encoding 옵션을 설정하지 않으면 OS의 기본 문자집합으로 자동 설정된다.
     //   Linux, macOS 의 기본 character set => UTF-8
     //   Windows 의 기본 character set => MS-949
+    //  
+    //   file.encoding 옵셥을 설정하지 않은 상테에서는
+    // - 같은 프로그램을 어느 OS에서 실행하느냐에 따라
+    //   출력되는 코드 값이 달라진다.(콘솔창)
     //
-    // - 따라서 같은 프로그램을 어느 OS에서 실행하느냐에 따라
-    //   출력되는 코드 값이 달라진다.
     //   만약 이클립스에서 실행한다면,
     //   무조건 UTF-8로 인코딩(코드 값으로 변환) 되어 출력된다.
     //   명령창(콘솔창)에서 실행한다면,

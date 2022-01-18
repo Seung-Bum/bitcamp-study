@@ -27,4 +27,5 @@ public class Exam0110 {
     System.out.printf("경과된 시간: %d\n", end - start);
   }
 
+  // 기존의 데이터 기능에 버퍼기능 추가
 }

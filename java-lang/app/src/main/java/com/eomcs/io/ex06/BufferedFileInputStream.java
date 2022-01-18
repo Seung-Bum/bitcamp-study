@@ -38,5 +38,3 @@ public class BufferedFileInputStream extends FileInputStream {
     return i; // 지금까지 읽은 데이터의 수를 리턴한다.
   }
 }
-
-

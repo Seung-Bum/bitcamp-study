@@ -18,9 +18,10 @@ public class DataFileInputStream extends FileInputStream {
 
   public int readInt() throws Exception {
     // 상속 받은 read() 메서드를 사용하여 int 값 출력
+    // int 4byte=8bit
     int value = 0;
 
-    value = this.read() << 24;
+    value = this.read() << 24; // 00 00 00 00
     value += this.read() << 16;
     value += this.read() << 8;
     value += this.read();

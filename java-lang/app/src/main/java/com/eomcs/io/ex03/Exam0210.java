@@ -10,6 +10,7 @@ public class Exam0210 {
 
     char[] chars = new char[] {'A', 'B', 'C', '0', '1', '2', '가', '각', '간', '똘', '똥'};
 
+    // 캐릭터는 2byte이다.
     // FileOutputStream 은 byte[] 을 출력하지만,
     // FileWriter 는 char[] 을 출력한다.
     out.write(chars); // 문자 배열 전체를 출력한다.
@@ -18,7 +19,7 @@ public class Exam0210 {
     // JVM이 입출력 문자 코드표로 UTF-8을 사용한다면
     // 영어는 1바이트로 변환되어 출력될 것이고,
     // 한글은 3바이트로 변환되어 출력될 것이다.
-    // JVM(UCS2)    File(UTF-8)
+    // JVM(UCS2, UTF-16)    File(UTF-8)
     // 00 41    ==> 41
     // 00 42    ==> 42
     // 00 43    ==> 43

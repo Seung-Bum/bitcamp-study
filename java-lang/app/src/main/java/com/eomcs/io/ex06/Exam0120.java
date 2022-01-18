@@ -8,6 +8,8 @@ public class Exam0120 {
   public static void main(String[] args) throws Exception {
     FileInputStream in = new FileInputStream("temp/jls11.pdf");
 
+    // 한번에 왕창왕창 읽기
+    // 매번 1byte씩 읽는것 보다 여러번 왕창 읽는게 빠름
     byte[] buf = new byte[8192]; // 보통 8KB 정도 메모리를 준비한다.
     int len = 0;
 
@@ -16,13 +18,15 @@ public class Exam0120 {
     int callCount = 0;
 
     while ((len = in.read(buf)) != -1) {
+      System.out.println("읽은 바이트 수: " + len);
       callCount++; // 파일을 끝까지 읽는다.
+
     }
 
     long endTime = System.currentTimeMillis();
 
     System.out.println(endTime - startTime);
-    System.out.println(callCount);
+    System.out.println("CALLCOUNT: " + callCount);
     in.close();
   }
 

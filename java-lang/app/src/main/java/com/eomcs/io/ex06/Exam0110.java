@@ -25,4 +25,8 @@ public class Exam0110 {
     in.close();
   }
 
+  //3755
+  //3336294
+  //
+  // read()는 기본적으로 int를 받지만 1byte씩 읽는다.
 }
