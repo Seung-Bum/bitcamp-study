@@ -9,7 +9,7 @@ public class Exam0120 {
 
     FileInputStream in0 = new FileInputStream("temp/members.data");
     BufferedInputStream in1 = new BufferedInputStream(in0);
-    DataInputStream in2 = new DataInputStream(in1);
+    DataInputStream in2 = new DataInputStream(in0);
 
     Member member = null;
 

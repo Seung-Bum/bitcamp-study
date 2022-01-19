@@ -1,7 +1,8 @@
 package com.eomcs.mylist.controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -20,13 +21,20 @@ public class BookController {
   public BookController() throws Exception {
     System.out.println("BookController() 호출됨!");
 
-    BufferedReader in = new BufferedReader(new FileReader("books.csv")); // 주 객체에 데코레이터 객체를 연결
+    // 주 작업 객체
+    DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("books.ser1")));
 
-    String line;
-
-    while ((line = in.readLine()) != null) { // readLine()이 null을 리턴한다면 더이상 읽을 데이터가 없다는 뜻!
-      bookList.add(Book.valueOf(line)); 
-      // 파일에서 읽은 CSV 데이터로 객체를 초기화시킨후 목록에 등록한다.
+    while (true) {
+      try {
+        Book book = new Book();
+        book.setTitle(in.readUTF());
+        book.setAuthor(in.readUTF());
+        book.setPress(in.readUTF());
+        book.setPage(in.readInt());
+        book.add(contact);
+      } catch (Exception e) { // 읽을 내용이 없으면 break
+        System.out.println("독서 목록 데이터를 가져올 수 없습니다.");
+      }
     }
     in.close();
   }

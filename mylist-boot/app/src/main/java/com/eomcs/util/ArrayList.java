@@ -1,6 +1,6 @@
 package com.eomcs.util;
 
-public class ArrayList {
+public class ArrayList implements java.io.Serializable {
 
   // 인스턴스 필드(변수)
   // => 인스턴스 필드는 new 명령을 통해 생성한다.

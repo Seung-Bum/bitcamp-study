@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class BufferedInputStream {
-  InputStream in;
+  InputStream in; // 이자리에 모든 InputStream이 올 수 있다.
 
   byte[] buf = new byte[8192];
   int size; // 배열에 저장되어 있는 바이트의 수
