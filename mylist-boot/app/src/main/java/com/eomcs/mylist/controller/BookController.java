@@ -1,10 +1,11 @@
 package com.eomcs.mylist.controller;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.FileOutputStream;
 import java.sql.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,12 +32,22 @@ public class BookController {
         book.setAuthor(in.readUTF());
         book.setPress(in.readUTF());
         book.setPage(in.readInt());
-        book.add(contact);
+        book.setPrice(in.readInt());
+        book.setFeed(in.readUTF());
+        String date = in.readUTF();
+        if (date.length() > 0) {
+          book.setReadDate(Date.valueOf(date));
+        }
+
+        bookList.add(book);
+
       } catch (Exception e) { // 읽을 내용이 없으면 break
         System.out.println("독서 목록 데이터를 가져올 수 없습니다.");
       }
+
+      in.close();
+
     }
-    in.close();
   }
 
 
@@ -81,16 +92,29 @@ public class BookController {
 
   @RequestMapping("/book/save")
   public Object save() throws Exception {
-    PrintWriter out = new PrintWriter(new FileWriter("books.csv"));  // 따로 경로를 지정하지 않으면 파일은 프로젝트 폴더에 생성된다.
+
+    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("books.ser1")));
 
     Object[] arr = bookList.toArray();
     for (Object obj : arr) {
       Book book = (Book) obj;
-      out.println(book.toCsvString());
+      out.writeUTF(book.getTitle());
+      out.writeUTF(book.getAuthor());
+      out.writeUTF(book.getPress());
+      out.writeInt(book.getPage());
+      out.writeInt(book.getPrice());
+      out.writeUTF(book.getFeed());
+      if (book.getReadDate() == null) {
+        out.writeUTF("");
+      } else {
+        out.writeUTF(book.getReadDate().toString());
+      }
     }
     out.close();
     return arr.length;
   }
+
+
 }
 
 
