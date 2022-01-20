@@ -50,7 +50,7 @@ public class Exam0133 {
 // => 인스턴스의 데이터가 같은지를 비교하고 싶다면, 
 //    이 메서드를 재정의(오버라이딩) 해야 한다.
 // => 오버라이딩의 예:
-//    String, 
+//    String, => 오버라이딩 한 클래스들
 //    랩퍼 클래스(Byte,Short,Integer,Long,
 //    Float,Double,Boolean,Character)
 // 

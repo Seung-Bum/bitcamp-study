@@ -22,6 +22,8 @@ public class Exam0140 {
     System.out.println(Integer.toHexString(obj1.hashCode()));
     System.out.println(Integer.toHexString(obj2.hashCode()));
 
+    // => 인스턴스 주소가 아니라 hashCode는 hashCode이다.
+    // => 인스턴스가 달라도 키는 같을 수 있다. 키 = hashcode
     System.out.println(obj1);
     System.out.println(obj2);
 

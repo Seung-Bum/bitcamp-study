@@ -30,11 +30,11 @@ public class Exam0141 {
     System.out.println(obj1 == obj2); // false
     System.out.println(obj1.equals(obj2)); // false
 
-    System.out.println(Integer.toHexString(obj1.hashCode()));
-    System.out.println(Integer.toHexString(obj2.hashCode()));
-
     System.out.println(obj1);
     System.out.println(obj2);
+
+    System.out.println(Integer.toHexString(obj1.hashCode()));
+    System.out.println(Integer.toHexString(obj2.hashCode()));
 
     // hash value?
     // - 데이터를 다른 데이터와 구분하기 위해 사용하는 특별한 정수 값이다.
