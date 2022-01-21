@@ -36,7 +36,8 @@ public class Exam0173 {
 
     @Override
     public Car clone() throws CloneNotSupportedException {
-      return (Car) super.clone();
+      return (Car) super.clone(); 
+      // super는 Object이다. => public 확장, 빵 소보루빵의 관계 이기 때문에 가능 
     }
   }
 
