@@ -1,4 +1,4 @@
-package com.eomcs.app5_1;
+package com.eomcs.app6;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ public class Command {
 
   public Command(String name, String[] values) {
     this.name = name;
-    for (String value : values) {
+    for(String value : values) {
       this.params.add(value);
     }
   }
@@ -17,15 +17,13 @@ public class Command {
     return this.name;
   }
 
-  public String getString(int paramIndex) {
-    return (String) this.params.get(paramIndex);
-  }
-
   public int getInt(int paramIndex) {
-    return Integer.parseInt((String) this.params.get(paramIndex));
+    return Integer.parseInt((String)this.params.get(paramIndex));
   }
 
   public int getParamSize() {
     return this.params.size();
   }
+
+
 }
