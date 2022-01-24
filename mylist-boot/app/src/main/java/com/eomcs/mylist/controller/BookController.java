@@ -42,7 +42,7 @@ public class BookController {
         bookList.add(book);
 
       } catch (Exception e) { // 읽을 내용이 없으면 break
-        System.out.println("독서 목록 데이터를 가져올 수 없습니다.");
+        break;
       }
 
       in.close();
