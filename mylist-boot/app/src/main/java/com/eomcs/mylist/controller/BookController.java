@@ -1,119 +1,60 @@
 package com.eomcs.mylist.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.sql.Date;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.mylist.dao.BookDao;
 import com.eomcs.mylist.domain.Book;
-import com.eomcs.util.ArrayList;
 
 @RestController 
 public class BookController {
 
   // Book 객체 목록을 저장할 메모리를 준비한다.
-  ArrayList bookList = new ArrayList();
-
-
-  public BookController() throws Exception {
-    System.out.println("BookController() 호출됨!");
-
-    // 주 작업 객체
-    DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("books.ser1")));
-
-    while (true) {
-      try {
-        Book book = new Book();
-        book.setTitle(in.readUTF());
-        book.setAuthor(in.readUTF());
-        book.setPress(in.readUTF());
-        book.setPage(in.readInt());
-        book.setPrice(in.readInt());
-        book.setFeed(in.readUTF());
-        String date = in.readUTF();
-        if (date.length() > 0) {
-          book.setReadDate(Date.valueOf(date));
-        }
-
-        bookList.add(book);
-
-      } catch (Exception e) { // 읽을 내용이 없으면 break
-        break;
-      }
-
-      in.close();
-
-    }
-  }
+  // @Autowired
+  // - 필드 선언부에 이 애노테이션을 붙여서 표시해 두면, 
+  //   Spring Boot가 BoardController 객체를 만들 때 BoardDao 구현체를 찾아 자동으로 주입한다. 
+  //
+  @Autowired
+  BookDao bookDao;
 
 
   @RequestMapping("/book/list")
   public Object list() {
-    return bookList.toArray(); 
+    return bookDao.findAll(); 
   }
 
   @RequestMapping("/book/add")
-  public Object add(Book book) {
-
+  public Object add(Book book) throws Exception {
     book.setReadDate(new Date(System.currentTimeMillis()));
-    bookList.add(book);
-    return bookList.size();
+    bookDao.insert(book);
+    return bookDao.countAll();
   }
 
   @RequestMapping("/book/get")
   public Object get(int index) {
-    if (index < 0 || index >= bookList.size()) {
+    Book book = bookDao.findByNo(index);
+    if (book == null) {
       return "";
     }
-    Book book = (Book) bookList.get(index);
-    System.out.println("GET: " + book);
     return book;
   }
 
   @RequestMapping("/book/update")
-  public Object update(int index, Book book) {
-    if (index < 0 || index >= bookList.size()) {
+  public Object update(int index, Book book) throws Exception {
+    Book old = bookDao.findByNo(index);
+    if (old == null) {
       return 0;
     }
-    return bookList.set(index, book) == null ? 0 : 1;
+    book.setReadDate(new Date(System.currentTimeMillis()));
+
+    return bookDao.update(index, book);
   }
 
   @RequestMapping("/book/delete")
-  public Object delete(int index) {
-    if (index < 0 || index >= bookList.size()) {
-      return 0;
-    }
-    return bookList.remove(index) == null ? 0 : 1;
+  public Object delete(int index) throws Exception {
+    return bookDao.delete(index);
   }
-
-  @RequestMapping("/book/save")
-  public Object save() throws Exception {
-
-    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("books.ser1")));
-
-    Object[] arr = bookList.toArray();
-    for (Object obj : arr) {
-      Book book = (Book) obj;
-      out.writeUTF(book.getTitle());
-      out.writeUTF(book.getAuthor());
-      out.writeUTF(book.getPress());
-      out.writeInt(book.getPage());
-      out.writeInt(book.getPrice());
-      out.writeUTF(book.getFeed());
-      if (book.getReadDate() == null) {
-        out.writeUTF("");
-      } else {
-        out.writeUTF(book.getReadDate().toString());
-      }
-    }
-    out.close();
-    return arr.length;
-  }
-
 
 }
 

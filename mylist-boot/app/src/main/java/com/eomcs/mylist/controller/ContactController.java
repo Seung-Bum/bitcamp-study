@@ -1,6 +1,5 @@
 package com.eomcs.mylist.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.dao.ContactDao;
@@ -13,7 +12,7 @@ public class ContactController {
   // - 필드 선언부에 이 애노테이션을 붙여서 표시해 두면, 
   //   Spring Boot가 BoardController 객체를 만들 때 BoardDao 구현체를 찾아 자동으로 주입한다. 
   //
-  @Autowired
+  //  @Autowired
   ContactDao contactDao;
 
   @RequestMapping("/contact/list")
@@ -30,8 +29,8 @@ public class ContactController {
 
   // index 값으로 email 받음
   @RequestMapping("/contact/get")
-  public Object get(int index) throws Exception {
-    Contact contact = contactDao.findByNo(index);
+  public Object get(String email) throws Exception {
+    Contact contact = contactDao.findByNo(email);
     if (contact == null) {
       return "";
     }
@@ -39,10 +38,9 @@ public class ContactController {
     return contact;
   }
 
-
   @RequestMapping("/contact/update")
-  public Object update(int index, Contact contact) throws Exception {
-    Contact old = contactDao.findByNo(index);
+  public Object update(String email, Contact contact) throws Exception {
+    Contact old = contactDao.findByNo(email); // findByNo 안에 indexOf 있음
     if (old == null) {
       return 0;
     }
@@ -51,15 +49,13 @@ public class ContactController {
     //    board.setViewCount(old.getViewCount());
     //    board.setCreatedDate(old.getCreatedDate());
 
-    return contactDao.update(index, contact);
+    return contactDao.update(email, contact);
   }
 
   @RequestMapping("/contact/delete")
-  public Object delete(int index) throws Exception {
-    return contactDao.delete(index);
+  public Object delete(String email) throws Exception {
+    return contactDao.delete(email);
   }
-
-
 
 }
 

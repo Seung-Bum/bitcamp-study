@@ -27,26 +27,17 @@ public abstract class AbstractContactDao implements ContactDao{
   }
 
   @Override
-  public Contact findByNo(int no) {
+  public Contact findByNo(String email) {
+    int no = indexOf(email);
     if (no < 0 || no >= contactList.size()) {
       return null;
     }
     return (Contact) contactList.get(no);
   }
 
-  // email로 index 찾을 수 있게 끔 바꿔야함
-  //  int indexOf(String email) {
-  //    for (int i = 0; i < contactList.size(); i++) {
-  //      Contact contact =  (Contact) contactList.get(i);
-  //      if (contact.getEmail().equals(email)) { 
-  //        return i;
-  //      }
-  //    }
-  //    return -1;
-  //  }
-
   @Override
-  public int update(int no, Contact contact) throws Exception {
+  public int update(String email, Contact contact) throws Exception {
+    int no = indexOf(email);
     if (no < 0 || no >= contactList.size()) {
       return 0;
     }
@@ -56,7 +47,10 @@ public abstract class AbstractContactDao implements ContactDao{
   }
 
   @Override
-  public int delete(int no) throws Exception {
+  public int delete(String email) throws Exception {
+
+    int no = indexOf(email);
+
     if (no < 0 || no >= contactList.size()) {
       return 0;
     }
@@ -65,11 +59,15 @@ public abstract class AbstractContactDao implements ContactDao{
     return 1;
   }
 
-  //  연락처 목록에 조회수는 없음
-  //  @Override
-  //  public void increaseViewCount(int no) throws Exception {
-  //    Contact contact = findByNo(no);
-  //    contact.setViewCount(contact.getViewCount() + 1);
-  //    save();
-  //  }
+  //  email로 index 찾을 수 있게 끔 바꿔야함 -> findByNo와 udate, delete 연결
+  int indexOf(String email) {
+    for (int i = 0; i < contactList.size(); i++) {
+      Contact contact =  (Contact) contactList.get(i);
+      if (contact.getEmail().equals(email)) { 
+        return i;
+      }
+    }
+    return -1;
+  }
+
 }

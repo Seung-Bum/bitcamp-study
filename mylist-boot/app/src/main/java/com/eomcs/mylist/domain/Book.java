@@ -3,7 +3,7 @@ package com.eomcs.mylist.domain;
 import java.sql.Date;
 
 // 다른 패키지에서 접근가능하도록 public
-public class Book {
+public class Book implements java.io.Serializable {
   String title;
   String author;
   String press;
@@ -105,10 +105,10 @@ public class Book {
     this.feed = feed;
   }
 
-  //  @Override
-  //  public String toString() {
-  //    return "Book [title=" + title + ", author=" + author + ", press=" + press + ", page=" + page
-  //        + ", price=" + price + ", readDate=" + readDate + ", feed=" + feed + "]";
-  //  }
+  @Override
+  public String toString() {
+    return "Book [title=" + title + ", author=" + author + ", press=" + press + ", page=" + page
+        + ", price=" + price + ", readDate=" + readDate + ", feed=" + feed + "]";
+  }
 
 }

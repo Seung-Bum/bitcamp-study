@@ -61,11 +61,11 @@ public class Contact {
         this.getCompany());
   }
 
-  //  @Override
-  //  public String toString() {
-  //    return "Contact [name=" + name + ", email=" + email + ", tel=" + tel + ", company=" + company
-  //        + "]";
-  //  }
+  @Override
+  public String toString() {
+    return "Contact [name=" + name + ", email=" + email + ", tel=" + tel + ", company=" + company
+        + "]";
+  }
 
   public String getName() {
     return name;

@@ -15,11 +15,10 @@ public interface ContactDao {
 
   void insert(Contact contact) throws Exception;
 
-  Contact findByNo(int no);
+  Contact findByNo(String email);
+  int update(String email, Contact contact) throws Exception;
 
-  int update(int no, Contact contact) throws Exception;
-
-  int delete(int no) throws Exception;
+  int delete(String email) throws Exception;
 
   //  void increaseViewCount(int no) throws Exception;
 }
