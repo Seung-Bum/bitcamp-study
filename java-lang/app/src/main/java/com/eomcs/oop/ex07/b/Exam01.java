@@ -25,7 +25,7 @@ public class Exam01 {
   public static void main(String[] args) {
 
     int[] values = createRandomNumbers(100000);
-    int[] values2 = Arrays.copyOf(values, values.length);
+    int[] values2 = Arrays.copyOf(values, values.length); // 서로 같은 값을 가짐
 
     BubbleSort s1 = new BubbleSort();
     QuickSort s2 = new QuickSort();

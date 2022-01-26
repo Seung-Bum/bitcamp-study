@@ -108,5 +108,6 @@ public class Exam0130 {
 
   public static void main(String[] args) {
     new Exam0130().test();
+
   }
 }

@@ -2,7 +2,7 @@
 package com.eomcs.oop.ex09.b;
 
 interface MyInterface5 {
-  // 인터페이스도 클래스처럼 static 메서드를 정의할 수 있다.
+  // 인터페이스도 클래스처럼 static 메서드를 정의할 수 있다. => 되도록 만들지 말라
   // => 접근 범위는 기본이 public 이다. 다른 접근 범위를 가질 수 없다.
   // => public 을 생략할 수 있다.
   //
