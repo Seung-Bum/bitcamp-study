@@ -47,7 +47,7 @@ public class Exam0120 {
     // 그 서브 클래스는 자동으로 인터페이스를 구현한 것이 된다.
     // 증명!
     //
-    ProtocolA a = obj;
+    ProtocolA a = obj; // 실제 obj가 가리키는 주소는 ProtocolAIml() 이다.
 
     a.rule2();
   }

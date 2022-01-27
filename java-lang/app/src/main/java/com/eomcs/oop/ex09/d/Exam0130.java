@@ -33,8 +33,8 @@ abstract class AbstractCar implements CarSpec {
   //    추상 클래스에서 미리 구현할 필요가 없다.
   // => 서브 클래스가 구현하도록 강제하기 위해 추상 메서드로 내비 둔다.
   //    인터페이스의 메서드를 구현하지 않는다면 다음과 같이 추상 메서드인채로 남겨진다.
-  //  @Override
-  //  public abstract void run();
+  @Override
+  public abstract void run();
 }
 
 // 3) 인터페이스 직접 구현하기
