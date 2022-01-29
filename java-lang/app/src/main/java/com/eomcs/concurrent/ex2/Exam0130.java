@@ -5,11 +5,16 @@ public class Exam0130 {
 
   public static void main(String[] args) {
     Thread main = Thread.currentThread();
+    Thread main1 = Thread.currentThread();
+    Thread main2 = Thread.currentThread();
+    Thread main3 = Thread.currentThread();
+    Thread main4 = Thread.currentThread();
+    Thread main5 = Thread.currentThread();
     ThreadGroup mainGroup = main.getThreadGroup();
 
     // 스레드 그룹에 소속된 스레드 목록을 알고 싶다면?
     Thread[] arr = new Thread[100];
-    int count = mainGroup.enumerate(arr, false);
+    int count = mainGroup.enumerate(arr, true);
     // 두 번째 파라미터 값을 false로 지정하면,
     // 하위 그룹에 소속된 스레드들은 제외한다.
     // 즉, 현재 그룹에 소속된 스레드 목록만 가져오라는 뜻!

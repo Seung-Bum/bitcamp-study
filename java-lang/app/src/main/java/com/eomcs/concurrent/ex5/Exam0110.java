@@ -29,7 +29,7 @@ public class Exam0110 {
       }
     }
 
-    public void delay() {
+    public void delay() { // 그냥 의미없는 계산 시간 끌기용
       int count = (int)(Math.random() * 1000);
       for (int i = 0; i < count; i++) {
         Math.atan(34.1234);

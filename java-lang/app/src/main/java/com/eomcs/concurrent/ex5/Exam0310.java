@@ -64,7 +64,7 @@ public class Exam0310 {
   }
 
   public static void main(String[] args) throws Exception {
-    Counter counter = new Counter(1000);
+    Counter counter = new Counter(1);
 
     Worker w1 = new Worker("홍길동", counter);
     Worker w2 = new Worker("%%%%%%%", counter);
