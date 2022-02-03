@@ -22,6 +22,7 @@ public class Client0410 {
     System.out.println("서버와 연결되었음!");
 
     keyScan.nextLine();
+    // 사용자가 엔터키 \n를 쳐야 다음으로 넘어감
 
     socket.close();
     System.out.println("서버와의 연결을 끊었음.");
