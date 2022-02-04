@@ -29,7 +29,7 @@ public class Exam0640 {
         // AutoCloseable 구현체가 아니기 때문에 여기에 선언할 수 없다. 
         //        B obj2 = new B(); // 컴파일 오류!
 
-        C obj3 = new C(); // OK
+        C obj3 = new C(); // OK close()가 자동호출 되었다.
         ) {
       System.out.println("try 블록 실행...");
     }

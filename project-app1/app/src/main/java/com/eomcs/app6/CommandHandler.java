@@ -3,31 +3,52 @@ package com.eomcs.app6;
 public class CommandHandler {
 
   void doHelp() {
-    System.out.println("사용법:");
-    System.out.println("App [명령] [값1] [값2]");
-    System.out.println("명령:");
-    System.out.println("add   [값1] [값2]     더하기 계산을 수행한다. 예) App add 100 200");
-    System.out.println("minus [값1] [값2]     빼기 계산을 수행한다. 예) App minus 100 200");
+    System.out.println("add   [값1] [값2]     더하기 계산을 수행한다.");
+    System.out.println("minus [값1] [값2]     빼기 계산을 수행한다.");
+    System.out.println("help                  도움말을 출력한다.");
   }
 
   void doAdd(Command command) {
     if (command.getParamSize() != 2) {
-      System.out.println("명령어 입력형식이 옳지 않습니다.");
+      System.out.println("add 명령어 입력 형식이 옳바르지 않습니다.");
+      System.out.println("형식: add 값1 값2");
+      System.out.println("예) add 100 200");
     } else {
       int v1 = command.getInt(0);
       int v2 = command.getInt(1);
-      System.out.printf("%d + %d = %d \n", v1, v2, v1 + v2);
+      System.out.printf("%d + %d = %d\n", v1, v2, (v1 + v2));
     }
   }
 
   void doMinus(Command command) {
     if (command.getParamSize() != 2) {
-      System.out.println("명령어 입력형식이 옳지 않습니다.");
+      System.out.println("minus 명령어 입력 형식이 옳바르지 않습니다.");
+      System.out.println("형식: minus 값1 값2");
+      System.out.println("예) minus 100 200");
     } else {
       int v1 = command.getInt(0);
       int v2 = command.getInt(1);
-      System.out.printf("%d - %d = %d \n", v1, v2, v1 - v2);
+      System.out.printf("%d - %d = %d\n", v1, v2, (v1 - v2));
+    }
+  }
+
+  void doDivide(Command command) {
+    if (command.getParamSize() != 2) {
+      System.out.println("divide 명령어 입력 형식이 옳바르지 않습니다.");
+      System.out.println("형식: divide 값1 값2");
+      System.out.println("예) divide 100 200");
+    } else {
+      int v1 = command.getInt(0);
+      int v2 = command.getInt(1);
+      System.out.printf("%d / %d = %d\n", v1, v2, (v1 / v2));
     }
   }
 
 }
+
+
+
+
+
+
+

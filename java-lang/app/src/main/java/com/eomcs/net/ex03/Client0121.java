@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+// 무조건 클라이언트가 먼저 데이터를 보내진 않는다.
 public class Client0121 {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);

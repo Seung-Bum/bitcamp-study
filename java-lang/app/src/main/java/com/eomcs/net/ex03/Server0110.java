@@ -79,9 +79,11 @@ public class Server0110 {
 
 
     } catch (Exception e) {
+      System.out.println("상세 예외 정보");
       e.printStackTrace();
 
     } finally {
+      System.out.println("키보드 자원 해제 및 서버 소켓 자원 해제!");
       try { keyboard.close(); } catch (Exception e) {}
       try { serverSocket.close();} catch (Exception e) {}
     }

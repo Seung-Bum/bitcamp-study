@@ -54,7 +54,7 @@ public class Client0110 {
     } finally {
       try {out.close();} catch (Exception e) {}
       try {in.close();} catch (Exception e) {}
-      try {socket.close();} catch (Exception e) {}
+      try {socket.close();} catch (Exception e) {} // 소켓을 먼저 닫으면 위에 in out 사용을 못함 소켓을 마지막에 닫아야함
     }
 
     keyScan.close();

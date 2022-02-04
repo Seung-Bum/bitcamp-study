@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Exam0620 {
 
   public static void main(String[] args) {
-    Scanner keyScan = null;
+    Scanner keyScan = null; // 트라이 안에 안두고 밖에 둬야 finally가 사용할 수 있다.
     try {
       keyScan = new Scanner(System.in);
 
