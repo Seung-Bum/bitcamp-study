@@ -28,7 +28,7 @@ public class CalcServer {
     @Override
     public void run() {
       // main 스레드와는 별개로 실행해야 하는 코드를 이 메서드에 둔다.
-      try (Socket socket2 = socket;
+      try (Socket socket2 = socket; // 변수로 꺼내줘야 자동 close() 됨
           DataInputStream in = new DataInputStream(socket.getInputStream());
           DataOutputStream out = new DataOutputStream(socket.getOutputStream());) {
 
