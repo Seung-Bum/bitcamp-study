@@ -22,6 +22,7 @@ public class CalcClient {
 
       System.out.print("값2? ");
       out.writeInt(Integer.parseInt(keyScan.nextLine()));
+      out.flush(); // 서버에 보내는게 끝나면 flush를 해주자
 
       String str = in.nextLine();
       System.out.println(str);
