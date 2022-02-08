@@ -15,6 +15,8 @@ public class Exam0210 {
     URL url = new URL("http://itempage3.auction.co.kr/DetailView.aspx?itemno=C204190906");
 
     // => URL 정보를 가지고 HTTP 요청을 수행할 객체를 얻는다.
+    // 응답헤더의 정보를 가져올 수 있다.
+    // 요새는 이걸 사용해야 한다.
     URLConnection con = url.openConnection();
 
     // => 웹서버와 연결한 후 HTTP 요청한다.

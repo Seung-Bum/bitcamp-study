@@ -45,7 +45,7 @@ public class HttpServer {
       socket.close();
     }
   }
-
+  // 브라우저로 요청함
 }
 
 

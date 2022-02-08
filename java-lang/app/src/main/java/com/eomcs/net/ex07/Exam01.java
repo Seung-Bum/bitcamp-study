@@ -10,7 +10,7 @@ public class Exam01 {
     // => [프로토콜]://서버주소:포트번호/자원의경로?파라미터명=값&파라미터명=값
     // - 프로토콜: http(80), https(443), ftp(21/20) 등
     // - 서버주소: IP 주소(192.168.0.1), 도메인명(www.bitcamp.co.kr)
-    // - 포트번호: 80(생략할 수 있다), 8080(프록시 서버) 등
+    // - 포트번호: 80 443(생략할 수 있다), 8080(프록시 서버) 등, -1은 설정을 안했다. 기본포트 사용
     // - 자원의경로: /index.html, /board/list.jsp 등
     // - 서버에 보내는 파라미터(Query String): 파라미터명=값&파라미터명=값
     //
@@ -23,7 +23,7 @@ public class Exam01 {
     //   - 메일 조회, 게시물 변경, 주문 등의 웹 프로그램을 가리킨다.
     //   - 예) index.php, index.jsp 등
     //
-    URL url = new URL("https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=bitcamp");
+    URL url = new URL("https://search.naver.com:443/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=bitcamp");
 
     // URL 분석
     System.out.printf("프로토콜: %s\n", url.getProtocol());
