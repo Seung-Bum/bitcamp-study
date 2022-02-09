@@ -1,103 +1,82 @@
 package com.eomcs.net.ex12;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class ChatServer {
 
-  // 연결된 클라이언트의 출력 스트림을 보관하는 목록
-  ArrayList<PrintStream> outputStreams = new ArrayList<>();
-
   int port;
+  @SuppressWarnings("rawtypes") // 신경쓰지말것 Arraylist를 import 했기 때문에 생김
+  // client에서 보낸 메시지들을 담는 ArrayList
+  // 원래는 제네릭을 사용해야 하지만 사용하지 않음
+  ArrayList clientOutputStreams = new ArrayList();
 
+  // port 설정
   public ChatServer(int port) {
     this.port = port;
   }
 
+  // 서버 실행
   public void service() {
-    try (ServerSocket serverSocket = new ServerSocket(port)) {
-      System.out.println("채팅 서버 시작!");
+    try (ServerSocket serverSocket = new ServerSocket(this.port)) { // socket생성
+      System.out.println("서버 실행 중...");
 
       while (true) {
-        new Thread(new ChatAgent(serverSocket.accept())).start();
-        System.out.println("채팅 클라이언트가 연결되었음!");
+        new RequestHandler(serverSocket.accept()).start();
       }
 
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println("서버 실행 오류 -" + e.getMessage());
     }
   }
 
-  synchronized private void send(String message) {
-    for (PrintStream out : outputStreams) {
-      try {
-        out.println(message);
-      } catch (Exception e) {
-        // 출력이 안되는 스트림은 다음에 사용하지 않기 위해 목록에서 제거한다.
-        outputStreams.remove(out);
-      }
+  // 다수의 client 에서 받은 메시지들을 다수의 client에게 뿌림
+  public void sendMessage(String message) {
+    for (int i = 0; i < clientOutputStreams.size(); i++) {
+      DataOutputStream out = (DataOutputStream) clientOutputStreams.get(i);
+      try {out.writeUTF(message);} catch (Exception e) {}
     }
   }
 
-  class ChatAgent implements Runnable {
 
+  class RequestHandler extends Thread {
     Socket socket;
 
-    public ChatAgent(Socket socket) {
+    public RequestHandler(Socket socket) {
       this.socket = socket;
     }
 
     @Override
     public void run() {
-      try (Socket socket = this.socket;
-          BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-          PrintStream out = new PrintStream(socket.getOutputStream())) {
+      try (Socket socket2 = socket;
+          DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+          DataInputStream in = new DataInputStream(socket.getInputStream())) {
 
-        // 출력 스트림을 ChatServer에 보관한다.
-        outputStreams.add(out);
+        clientOutputStreams.add(out);
+
+        out.writeUTF("환영합니다.");
+        out.flush();
 
         while (true) {
-          String message = in.readLine();
-          if (message.equals("quit"))
+          String message = in.readUTF();
+          if(message.equals("\\quit")) {
+            out.writeUTF("Goodbye!");
+            out.flush();
             break;
-
-          // 채팅 방에 참여한 모든 사람들에게 메시지를 전달한다.
-          // => 메시지를 전문적으로 보내는 일을 하는 객체에 맡긴다.
-          new Thread(new MessageSender(message)).start();
+          }
+          sendMessage(message);
         }
 
-        // 채팅 방에 참여한 모든 사람들에게 퇴장 메시지를 전달한다.
-
       } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println("클라이언트와의 통신 오류! - " + e.getMessage());
       }
-      System.out.println("채팅 클라이언트가 종료되었음!");
-    }
-  }
-
-  class MessageSender implements Runnable {
-    String message;
-
-    public MessageSender(String message) {
-      this.message = message;
-    }
-
-    @Override
-    public void run() {
-      // 바깥 클래스의 메서드를 호출하여 메시지를 보낸다.
-      send(message);
     }
   }
 
   public static void main(String[] args) {
-    ChatServer chatServer = new ChatServer(8888);
-    chatServer.service();
+    new ChatServer(8888).service(); // 생성자를 통해 port번호 설정하고 service() 호출
   }
-
 }
-
-

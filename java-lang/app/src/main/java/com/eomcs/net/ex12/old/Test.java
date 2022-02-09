@@ -1,4 +1,4 @@
-package com.eomcs.net.ex12;
+package com.eomcs.net.ex12.old;
 
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
