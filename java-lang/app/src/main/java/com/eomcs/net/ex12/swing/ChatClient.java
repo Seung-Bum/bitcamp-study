@@ -25,6 +25,7 @@ public class ChatClient extends JFrame {
   Socket socket;
   DataInputStream in;
   DataOutputStream out;
+  String nickname; // 기본으로 null값이 생성된다.
 
   // JFrame 도구
   JTextField messageTf = new JTextField(35); // message
@@ -32,12 +33,37 @@ public class ChatClient extends JFrame {
   JTextField addressTf = new JTextField(30); // IP
   JTextArea messageListTa = new JTextArea(); // text
 
+  JButton connectBtn = new JButton("연결"); // 버튼 생성
+
+
   // 실무에서는 this를 뺀다.
   public ChatClient() {
-    super("채팅!"); // super는 JFrame
+    //    super("채팅!"); // super는 JFrame , 자동 삽입된다.
+
+    String title = "대화명을 입력하세요.\n(2자이상)";
+
+    while (true) {
+      nickname = JOptionPane.showInputDialog(title);
+
+      if (nickname == null) {
+        System.exit(0);
+      } else if(nickname != null && nickname.length() >= 2) {
+        break;
+      } 
+      title = "대화명을 다시 입력하세요!\n(2자이상)";
+    }
+
+    setTitle("채팅!! - " + nickname); // 상속받은 메서드
+
     addWindowListener(new WindowAdapter() { // 슈퍼클래스의 생성자 호출
       @Override
       public void windowClosing(WindowEvent e) {
+        if (connectBtn.getText().equals("종료")) {
+          try {
+            out.writeUTF("\\quit");
+            out.flush();
+          } catch (Exception ex) {}
+        }
         // 윈도우의 x 버튼을 눌렀을 때
         try {in.close();} catch (Exception ex) {}
         try {out.close();} catch (Exception ex) {}
@@ -57,7 +83,7 @@ public class ChatClient extends JFrame {
     topPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // LEFT정렬
     topPanel.add(addressTf); // top에 IP
     topPanel.add(portTf); // top에 port
-    JButton connectBtn = new JButton("연결"); // 버튼 생성
+
     // 서버연결 버튼에 connectChatServer 이벤트 추가
     connectBtn.addActionListener(this::connectChatServer); 
     topPanel.add(connectBtn); // top에 연결버튼 추가
@@ -84,6 +110,7 @@ public class ChatClient extends JFrame {
     messageTf.addActionListener(this::sendMessage);
 
     setVisible(true); //창을 화면에 나타낼 것인지 설정
+
   }
 
 
@@ -96,24 +123,35 @@ public class ChatClient extends JFrame {
   }
 
 
+  // 서버연결
   public void connectChatServer(ActionEvent e) {
-    System.out.println("서버에 연결하기 실행!");
+    if (connectBtn.getText().equals("연결")) {
 
-    try {
-      socket = new Socket(
-          addressTf.getText(), // IP주소 가져오기
-          Integer.parseInt(portTf.getText())); // port번호 가져오기
+      try {
+        socket = new Socket(
+            addressTf.getText(), // IP주소 가져오기
+            Integer.parseInt(portTf.getText())); // port번호 가져오기
 
-      // socket in, out 도구들
-      in = new DataInputStream(socket.getInputStream());
-      out = new DataOutputStream(socket.getOutputStream());
+        // socket in, out 도구들
+        in = new DataInputStream(socket.getInputStream());
+        out = new DataOutputStream(socket.getOutputStream());
 
-      // 서버에서보낸 메시지 받음 (다른 사용자가 보낸 값들을 받음)
-      new MessageReceiver(in).start(); // Thread 실행
+        out.writeUTF(nickname);
+        out.flush();
 
-    } catch (Exception ex) {
-      // 오류 메시지 창 띄우기
-      JOptionPane.showMessageDialog(this, "서버에 연결 중 오류 발생!", "통신 오류!", JOptionPane.ERROR_MESSAGE);
+        // 서버에서보낸 메시지 받음 (다른 사용자가 보낸 값들을 받음)
+        new MessageReceiver(in).start(); // Thread 실행
+
+      } catch (Exception ex) {
+        // 오류 메시지 창 띄우기
+        JOptionPane.showMessageDialog(this, "서버에 연결 중 오류 발생!", "통신 오류!", JOptionPane.ERROR_MESSAGE);
+      }
+
+      connectBtn.setText("종료");
+    } else {
+
+      connectBtn.setText("연결");
+      messageListTa.setText("");
     }
   }
 
@@ -135,6 +173,8 @@ public class ChatClient extends JFrame {
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(this, "메시지 전송 오류!", "통신 오류!", JOptionPane.ERROR_MESSAGE);
     }
+
+
   }
 
   // 다중 클라이언트 서버 이용을 가능하게함 
@@ -152,6 +192,10 @@ public class ChatClient extends JFrame {
       while (true) {
         try {
           String message = in.readUTF();
+          if (message.equals("<![QUIT[]]>")) { // 서버에서 연결을 끊겠다는 메시지가 오면 스레드를 종료한다.
+            break; // 스레드 종료? run() 메서드의 실행을 마치면 스레드는 종료한다.
+          }
+          messageListTa.append(message + "\n");
 
         } catch (Exception e) {
 

@@ -6,22 +6,18 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+@SuppressWarnings("rawtypes")
 public class ChatServer {
 
   int port;
-  @SuppressWarnings("rawtypes") // 신경쓰지말것 Arraylist를 import 했기 때문에 생김
-  // client에서 보낸 메시지들을 담는 ArrayList
-  // 원래는 제네릭을 사용해야 하지만 사용하지 않음
   ArrayList clientOutputStreams = new ArrayList();
 
-  // port 설정
   public ChatServer(int port) {
     this.port = port;
   }
 
-  // 서버 실행
   public void service() {
-    try (ServerSocket serverSocket = new ServerSocket(this.port)) { // socket생성
+    try (ServerSocket serverSocket = new ServerSocket(this.port)) {
       System.out.println("서버 실행 중...");
 
       while (true) {
@@ -29,18 +25,28 @@ public class ChatServer {
       }
 
     } catch (Exception e) {
-      System.out.println("서버 실행 오류 -" + e.getMessage());
+      System.out.println("서버 실행 오류 - " + e.getMessage());
     }
   }
 
-  // 다수의 client 에서 받은 메시지들을 다수의 client에게 뿌림
+  @SuppressWarnings("unchecked")
   public void sendMessage(String message) {
+    ArrayList deleteStreams = new ArrayList();
+
     for (int i = 0; i < clientOutputStreams.size(); i++) {
       DataOutputStream out = (DataOutputStream) clientOutputStreams.get(i);
-      try {out.writeUTF(message);} catch (Exception e) {}
+      try {
+        out.writeUTF(message);
+      } catch (Exception e) {
+        System.out.println("전송 오류: " + message);
+        deleteStreams.add(out); // 무효한 출력 스트림은 삭제 명단에 등록한다.
+      }
+    }
+
+    for (Object deleteStream : deleteStreams) { // 삭제 명단에 등록된 출력 스트림을 클라이언트 목록에서 제거한다.
+      clientOutputStreams.remove(deleteStream);
     }
   }
-
 
   class RequestHandler extends Thread {
     Socket socket;
@@ -49,6 +55,7 @@ public class ChatServer {
       this.socket = socket;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void run() {
       try (Socket socket2 = socket;
@@ -57,19 +64,21 @@ public class ChatServer {
 
         clientOutputStreams.add(out);
 
-        out.writeUTF("환영합니다.");
+        String nickname = in.readUTF();
+
+        out.writeUTF(nickname + " 님 환영합니다!");
         out.flush();
 
         while (true) {
           String message = in.readUTF();
-          if(message.equals("\\quit")) {
-            out.writeUTF("Goodbye!");
+          if (message.equals("\\quit")) {
+            out.writeUTF("<![QUIT[]]>"); // 연결을 끊겠다는 특별한 메시지를 클라이언트에게 보낸다.
             out.flush();
+            clientOutputStreams.remove(out); // 메시지 출력 목록에서 연결이 종료된 클라이언트를 제거한다.
             break;
           }
-          sendMessage(message);
+          sendMessage(String.format("[%s] %s", nickname, message));
         }
-
       } catch (Exception e) {
         System.out.println("클라이언트와의 통신 오류! - " + e.getMessage());
       }
@@ -77,6 +86,6 @@ public class ChatServer {
   }
 
   public static void main(String[] args) {
-    new ChatServer(8888).service(); // 생성자를 통해 port번호 설정하고 service() 호출
+    new ChatServer(8888).service();
   }
 }
