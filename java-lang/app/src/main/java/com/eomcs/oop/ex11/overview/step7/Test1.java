@@ -1,4 +1,4 @@
-package com.eomcs.oop.ex11.overview.step1;
+package com.eomcs.oop.ex11.overview.step7;
 
 public class Test1 {
   public static void main(String[] args) {
@@ -10,9 +10,9 @@ public class Test1 {
     myList.add("윤봉길");
     myList.add("김구");
 
-    for (int i = 0; i < myList.size(); i++) {
-      System.out.println(myList.get(i));
+    Iterator iterator = myList.iterator();
+    while (iterator.hasNext()) {
+      System.out.println(iterator.next());
     }
-    System.out.println(myList.size());
   }
 }

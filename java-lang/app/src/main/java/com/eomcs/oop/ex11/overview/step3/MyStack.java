@@ -1,4 +1,4 @@
-package com.eomcs.oop.ex11.overview.step1;
+package com.eomcs.oop.ex11.overview.step3;
 
 import java.util.EmptyStackException;
 
@@ -13,5 +13,11 @@ public class MyStack extends MyList {
       throw new EmptyStackException();
     }
     return remove(size - 1);
+  }
+
+  // 상속받은 메서드 중에서 서브클래스의 목적에 맞게 재정의함
+  @Override
+  public Iterator iterator() {
+    return new StackIterator(this);
   }
 }

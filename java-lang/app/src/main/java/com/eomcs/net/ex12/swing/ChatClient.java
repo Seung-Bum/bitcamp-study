@@ -40,14 +40,16 @@ public class ChatClient extends JFrame {
   public ChatClient() {
     //    super("채팅!"); // super는 JFrame , 자동 삽입된다.
 
+    // 팝업창 text설정
     String title = "대화명을 입력하세요.\n(2자이상)";
 
     while (true) {
+      // 팝업창 생성하기
       nickname = JOptionPane.showInputDialog(title);
 
       if (nickname == null) {
         System.exit(0);
-      } else if(nickname != null && nickname.length() >= 2) {
+      } else if(nickname.length() >= 2) {
         break;
       } 
       title = "대화명을 다시 입력하세요!\n(2자이상)";
@@ -85,6 +87,7 @@ public class ChatClient extends JFrame {
     topPanel.add(portTf); // top에 port
 
     // 서버연결 버튼에 connectChatServer 이벤트 추가
+    // 메서드 레퍼런스
     connectBtn.addActionListener(this::connectChatServer); 
     topPanel.add(connectBtn); // top에 연결버튼 추가
     contentPane.add(topPanel, BorderLayout.NORTH); // 만들어진 topPanel을 전체 캔버스에 추가
@@ -149,7 +152,11 @@ public class ChatClient extends JFrame {
 
       connectBtn.setText("종료");
     } else {
-
+      try {
+        out.writeUTF("\\quit");
+        out.flush();
+      } catch (Exception ex) { 
+      }
       connectBtn.setText("연결");
       messageListTa.setText("");
     }
@@ -173,8 +180,6 @@ public class ChatClient extends JFrame {
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(this, "메시지 전송 오류!", "통신 오류!", JOptionPane.ERROR_MESSAGE);
     }
-
-
   }
 
   // 다중 클라이언트 서버 이용을 가능하게함 
@@ -197,9 +202,7 @@ public class ChatClient extends JFrame {
           }
           messageListTa.append(message + "\n");
 
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
       }
     }
   }

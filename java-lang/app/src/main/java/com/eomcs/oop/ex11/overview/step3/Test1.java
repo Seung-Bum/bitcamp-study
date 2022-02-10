@@ -1,7 +1,8 @@
-package com.eomcs.oop.ex11.overview.step1;
+package com.eomcs.oop.ex11.overview.step3;
 
 public class Test1 {
   public static void main(String[] args) {
+
     MyList myList = new MyList();
     myList.add("홍길동");
     myList.add("임꺽정");
@@ -10,9 +11,9 @@ public class Test1 {
     myList.add("윤봉길");
     myList.add("김구");
 
-    for (int i = 0; i < myList.size(); i++) {
-      System.out.println(myList.get(i));
+    Iterator iterator = myList.iterator(); // Iterator가 바뀔리는 없다.
+    while (iterator.hasNext()) { // 꺼낼게 있는지 물어본다.
+      System.out.println(iterator.next()); // list 사이즈만큼 값을 가져온다.
     }
-    System.out.println(myList.size());
   }
 }
