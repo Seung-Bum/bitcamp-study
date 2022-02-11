@@ -28,8 +28,19 @@ public class Exam0111 {
       }
     };
     obj2.print();
+
+
+    new A() {
+      @Override
+      public void print() {
+        System.out.println("Hello!");
+      }
+    }.print();
+
   }
 }
+
+
 
 // 익명 클래스를 정의하는 과정
 // 1단계 : 로컬 클래스

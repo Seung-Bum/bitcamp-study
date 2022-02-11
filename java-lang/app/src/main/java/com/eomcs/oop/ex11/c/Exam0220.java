@@ -41,19 +41,19 @@ public class Exam0220 {
   public static void main(String[] args) {
     B2 outer = new B2();
     outer.v2 = 100;
-    outer.m2();
+    outer.m2(); // B2.v2 = 100
 
 
     B2 outer2 = new B2();
     outer2.v2 = 200;
-    outer2.m2();
+    outer2.m2(); // B2.v2 = 200
 
     // inner 객체 생성
     B2.X inner = outer.new X(); // --> new X(outer)
     B2.X inner2 = outer2.new X(); // --> new X(outer2)
 
-    inner.test();
-    inner2.test();
+    inner.test(); // 100
+    inner2.test(); // 200
 
     B2 outer3 = null;
     B2.X inner3 = outer3.new X(); 

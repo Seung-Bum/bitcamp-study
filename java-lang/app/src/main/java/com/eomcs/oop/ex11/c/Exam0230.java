@@ -27,11 +27,11 @@ public class Exam0230 {
 
     B3.X x1 = outer.new X();
     x1.test();
-    System.out.println("--------------------");
+    System.out.println("--------------------"); // v1 1000, this.v1 100, B3.this.v1 11
 
     B3.X x2 = outer.new X();
     x2.test();
-    System.out.println("--------------------");
+    System.out.println("--------------------"); 
 
     B3 outer2 = new B3();
     outer2.v1 = 22;
