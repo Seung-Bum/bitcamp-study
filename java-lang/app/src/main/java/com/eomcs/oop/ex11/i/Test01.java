@@ -6,9 +6,9 @@ public class Test01 {
   public static void main(String[] args) {
     int[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
-    List list = new List(a);
+    List list = new List(a); // int 배열 생성
 
-    EvenFilter filter = new EvenFilter();
+    EvenFilter filter = new EvenFilter(); // 짝수일때 true 리턴
 
     int[] r = list.toArray(filter);
 
