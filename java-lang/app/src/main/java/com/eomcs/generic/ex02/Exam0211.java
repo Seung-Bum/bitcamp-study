@@ -5,15 +5,16 @@ import java.util.ArrayList;
 
 public class Exam0211 {
   public static void main(String[] args) {
-    // 만약 <타입명> 을 생략한다면, 제네릭이 적용된 객체를 담을 수 있다.
-    ArrayList list1; 
-    list1 = new ArrayList();
-    list1 = new ArrayList<>();
-    list1 = new ArrayList<Object>();
+    // 만약 <타입명> 을 생략한다면, 제네릭이 적용된 객체를 담을 수 있다. 아무거나 다 담을 수 있다.(Object)
+    ArrayList list1; // 타입지정 안함 레퍼런스의 제네릭 타입이 중요함 Object
+    //    list1 = new ArrayList();
+    //    list1 = new ArrayList<>();
+    //    list1 = new ArrayList<Object>();
     list1 = new ArrayList<String>();
-    list1 = new ArrayList<Member>();
+    //    list1 = new ArrayList<Member>();
 
-    //=> 단  ArrayList에 적용된 제네릭 문법은 무용지물이 된다.
+    //  => 레퍼런스를 선언할 때 제네릭 타입을 지정하지 않으면
+    //  ArrayList 객체를 생성할 때 지정한 제네릭 타입은 무시된다.
     list1.add(new String());
     list1.add(new Integer(100));
     list1.add(new java.util.Date());
@@ -22,7 +23,7 @@ public class Exam0211 {
 
     // ArrayList가 다루는 타입에 상관없이 ArrayList 레퍼런스를 선언하고 싶다면,
     // list1 처럼 선언하지 말고 다음과 같이 명확하게 <?> 를 붙여라!
-    ArrayList<?> list2; 
+    ArrayList<?> list2; // 타입을 지정하지 않음 Object
     list2 = new ArrayList(); // 이렇게 사용하지 말고, 명확히 제네릭의 타입을 지정하라.
     list2 = new ArrayList<>();
     list2 = new ArrayList<Object>();

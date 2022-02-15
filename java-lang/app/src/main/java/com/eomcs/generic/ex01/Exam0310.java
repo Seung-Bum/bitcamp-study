@@ -36,7 +36,7 @@ class A2<T,S,U> {
 public class Exam0310 {
 
   public static void main(String[] args) {
-    A<String,Integer,Member> obj = new A<>();
+    A<String,Integer,Member> obj = new A<>(); // <String,Integer,Member> 적어도 되지만 생략해도됨
 
     obj.v1 = new String("Hello");
     obj.v2 = Integer.valueOf(100);

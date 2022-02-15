@@ -47,6 +47,7 @@ public class Exam0223 {
     // 컴파일러는 파라미터로 넘어온 ArrayList가  어떤 타입이든 간에 
     // 문법적으로 B1 타입의 값만 다룬다.
 
+    // 사용할때는 다형적변수 상관함
     //list.add(new Object()); // 컴파일 오류!
     //list.add(new A()); // 컴파일 오류!
     list.add(new B1());

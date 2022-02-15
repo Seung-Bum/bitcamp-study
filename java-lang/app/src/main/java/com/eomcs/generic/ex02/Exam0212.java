@@ -6,13 +6,16 @@ import java.util.ArrayList;
 public class Exam0212 {
   public static void main(String[] args) {
 
+    //=> 지정하지 않으면 하위 가능 하다.
     ArrayList<Object> list1;
     // 제네릭 타입을 Object로 지정하면 
     // 그렇게 지정된 ArrayList 객체만 list1에 저장할 수 있다.
 
-    list1 = new ArrayList(); // 이렇게 사용하지 말고, 명확히 제네릭의 타입을 지정하라.
+    //    list1 = new ArrayList(); // 이렇게 사용하지 말고, 명확히 제네릭의 타입을 지정하라.
     list1 = new ArrayList<>();
     list1 = new ArrayList<Object>();
+    //        list1 = new ArrayList<String>(); // 컴파일 오류!
+    //    list1 = new ArrayList<Integer>(); // 컴파일 오류!
 
     // ArrayList<Object> 로 만든 객체는 다음과 같이 Object의 모든 객체를 담을 수 있다.
     list1.add(new String()); 
@@ -20,8 +23,6 @@ public class Exam0212 {
     list1.add(new Integer(100));
     list1.add(new StringBuffer());
 
-    //    list1 = new ArrayList<String>(); // 컴파일 오류!
-    //    list1 = new ArrayList<Integer>(); // 컴파일 오류!
   }
 }
 
