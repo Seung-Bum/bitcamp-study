@@ -1,0 +1,44 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'eclipse'
+}
+
+// gradle을 위한 설정
+tasks.withType(JavaCompile) {
+    // 프로젝트의 소스 파일 인코딩을 gradle에게 알려준다.
+    // $javac -encoding UTF-8 ..
+    options.encoding = 'UTF-8'
+
+    // 소스 파일을 작성할 때 사용할 자바 버전
+    sourceCompatibility = '11'
+
+    // 자바 클래스를 실행시킬 JVM의 최소 버전
+    targetCompatibility = '11'
+}
+
+// eclipse 프로젝트 이름을 설정하기
+eclipse {
+    project {
+        name = "project-app2"
+    }
+      jdt {
+      //if you want to alter the java versions (by default they are configured with gradle java plugin settings):
+      sourceCompatibility = 11
+      targetCompatibility = 11
+      javaRuntimeName = "JavaSE-11"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'com.google.guava:guava:30.1.1-jre'
+}
+
+application {
+    mainClass = 'com.eomcs.app2.App'
+}
