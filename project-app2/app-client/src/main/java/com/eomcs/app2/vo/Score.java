@@ -1,6 +1,10 @@
 package com.eomcs.app2.vo;
 
-public class Score {
+import java.io.Serializable;
+
+public class Score  implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   String name;
   int kor;
   int eng;
@@ -8,8 +12,6 @@ public class Score {
   int sum;
   float average;
 
-  // 데이터는 데이터를 다루는 곳에 
-  // 외부에서 사용 static
   public static Score fromCSV(String csv) {
     String[] values = csv.split(",");
     Score score = new Score();
@@ -21,7 +23,7 @@ public class Score {
   }
 
   public String toCSV() {
-    return String.format("%s,%d,%d,%d",
+    return String.format("%s,%d,%d,%d", 
         this.getName(),
         this.getKor(),
         this.getEng(),
@@ -72,5 +74,6 @@ public class Score {
     return "Score [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
         + sum + ", average=" + average + "]";
   }
+
 
 }
