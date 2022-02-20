@@ -8,7 +8,7 @@ public class Luckytest {
   }
 
   private static void luckytest() {
-    String[] jebi = {"행운", "좋음", "보통", "조심", "나쁨"};
+    String[] jebi = {"김지현", "한상은", "김규범", "양성은", "김주은", "양승범"};
     Random rnd = new Random();
     int id = rnd.nextInt(jebi.length); // 0~n 미만의 정수형 난수 반환
     System.out.println(jebi[id]);
