@@ -1,4 +1,4 @@
-// 바이너리 파일을 텍스트 형식으로 저장하기 
+// 바이너리 파일을 텍스트 형식으로   저장하기
 package com.eomcs.io.ex15;
 
 import java.io.File;
