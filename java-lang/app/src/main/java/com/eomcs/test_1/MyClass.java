@@ -1,4 +1,4 @@
-package com.eomcs.mytest;
+package com.eomcs.test_1;
 
 public class MyClass {
 

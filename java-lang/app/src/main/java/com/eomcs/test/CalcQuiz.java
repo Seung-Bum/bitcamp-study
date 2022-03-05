@@ -6,7 +6,7 @@ public class CalcQuiz {
   String question;
   String answer;
 
-  CalcQuiz () {
+  public CalcQuiz () {
     createQuestion();
   }
 
@@ -18,11 +18,11 @@ public class CalcQuiz {
     answer = Integer.toString(a * b);
   }
 
-  String getQestion() {
+  public String getQuestion() {
     return question;
   }
 
-  String getAnswer() {
+  public String getAnswer() {
     return answer;
   }
 }
