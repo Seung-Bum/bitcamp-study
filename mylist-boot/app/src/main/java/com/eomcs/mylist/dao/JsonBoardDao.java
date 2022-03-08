@@ -1,6 +1,7 @@
 package com.eomcs.mylist.dao;
 
 import java.io.File;
+import java.util.List;
 import com.eomcs.mylist.domain.Board;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,7 +17,9 @@ public class JsonBoardDao extends AbstractBoardDao {
   public JsonBoardDao() {
     try {
       ObjectMapper mapper = new ObjectMapper();
-      boardList.addAll(mapper.readValue(new File(filename), Board[].class));
+      boardList.addAll(mapper.readValue(new File(filename), 
+          mapper.getTypeFactory().constructCollectionType(List.class, Board.class))); 
+      // 컬렉션타입의 보드 객체를 넣어주세요
 
     } catch (Exception e) {
       System.out.println("게시글 데이터 로딩 중 오류 발생!");

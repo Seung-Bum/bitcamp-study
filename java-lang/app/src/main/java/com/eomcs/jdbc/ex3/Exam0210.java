@@ -21,7 +21,7 @@ public class Exam0210 {
     }
 
     try (Connection con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement("insert into x_board(title,contents) values(?,?)")) {
 
       // SQL 삽입 공격

@@ -1,11 +1,11 @@
 package com.eomcs.mylist.dao;
 
+import java.util.ArrayList;
 import com.eomcs.mylist.domain.Contact;
-import com.eomcs.util.ArrayList;
 
 public abstract class AbstractContactDao implements ContactDao{
 
-  protected ArrayList contactList = new ArrayList(); 
+  protected ArrayList<Contact> contactList = new ArrayList<>(); 
 
   protected abstract void save() throws Exception;
 
@@ -32,7 +32,7 @@ public abstract class AbstractContactDao implements ContactDao{
     if (no < 0 || no >= contactList.size()) {
       return null;
     }
-    return (Contact) contactList.get(no);
+    return contactList.get(no);
   }
 
   @Override
@@ -62,7 +62,7 @@ public abstract class AbstractContactDao implements ContactDao{
   //  email로 index 찾을 수 있게 끔 바꿔야함 -> findByNo와 udate, delete 연결
   int indexOf(String email) {
     for (int i = 0; i < contactList.size(); i++) {
-      Contact contact =  (Contact) contactList.get(i);
+      Contact contact =  contactList.get(i);
       if (contact.getEmail().equals(email)) { 
         return i;
       }

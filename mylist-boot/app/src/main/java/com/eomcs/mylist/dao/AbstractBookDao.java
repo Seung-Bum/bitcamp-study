@@ -1,10 +1,10 @@
 package com.eomcs.mylist.dao;
 
+import java.util.ArrayList;
 import com.eomcs.mylist.domain.Book;
-import com.eomcs.util.ArrayList;
 
 public abstract class AbstractBookDao implements BookDao {
-  protected ArrayList bookList = new ArrayList();
+  protected ArrayList<Book> bookList = new ArrayList<>();
 
   protected abstract void save() throws Exception;
 
@@ -29,7 +29,7 @@ public abstract class AbstractBookDao implements BookDao {
     if (no < 0 || no >= bookList.size()) {
       return null;
     }
-    return (Book) bookList.get(no);
+    return bookList.get(no);
   }
 
   @Override
@@ -53,10 +53,10 @@ public abstract class AbstractBookDao implements BookDao {
   }
 
   // book에는 조회수가 없다.
-//  @Override
-//  public void increaseViewCount(int no) throws Exception {
-//    Book book = findByNo(no);
-//    book.setViewCount(book.getViewCount() + 1);
-//    save();
-//  }
+  //  @Override
+  //  public void increaseViewCount(int no) throws Exception {
+  //    Book book = findByNo(no);
+  //    book.setViewCount(book.getViewCount() + 1);
+  //    save();
+  //  }
 }

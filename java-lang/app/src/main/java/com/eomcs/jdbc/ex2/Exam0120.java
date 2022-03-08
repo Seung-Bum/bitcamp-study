@@ -17,13 +17,13 @@ public class Exam0120 {
 
   public static void main(String[] args) throws Exception {
     try (Connection con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery(
+        ResultSet rs = stmt.executeQuery( // ResultSet은 결과를 가져오는 도구
             "select * from x_board order by board_id desc")) {
 
       System.out.println("번호, 제목, 등록일, 조회수");
-      while (rs.next()) {
+      while (rs.next()) { // next를 통해 레코드 1개를 가져온다.
         // 레코드에서 컬럼 값을 꺼낼 때 컬럼 번호를 지정하는 것 보다
         // 컬럼의 이름을 지정하는 것이 유지보수에 더 좋다.
         //

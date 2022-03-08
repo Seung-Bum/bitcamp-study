@@ -25,7 +25,7 @@ public class Exam0220 {
     }
 
     try (Connection con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/studydb?user=study&password=1111");
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
 
         // PreparedStatement는 미리 SQL 문장을 준비하여 값을 삽입하는 기법이다.
         PreparedStatement stmt = con.prepareStatement(
@@ -73,7 +73,7 @@ public class Exam0220 {
       // [Statement]
       // - 사용자가 입력한 값을 가지고 SQL 문장을 만들기 때문에 해킹되기 쉽다.
       // [PreparedStatement]
-      // - SQL 문장과 값이 분리되어 다뤄지기 때문에 해킹할 수 없다.
+      // - SQL 문장과 값이 분리되어 다뤄지기 때문에 해킹할 수 없다. @@
       //
       // 3) 바이너리 데이터 다루기
       // [Statement]
@@ -81,7 +81,7 @@ public class Exam0220 {
       //   바이너리 타입의 컬럼 값을 설정할 수 없다.
       // [PreparedStatement]
       // - setXxx() 메서드를 호출하여 값을 설정하기 때문에
-      //   바이너리 타입의 컬럼 값을 설정할 수 있다.
+      //   바이너리 타입의 컬럼 값을 설정할 수 있다. @@
       //
       // 4) 실행 속도
       // [Statement]

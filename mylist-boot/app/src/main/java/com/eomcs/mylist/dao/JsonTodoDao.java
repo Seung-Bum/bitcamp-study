@@ -1,6 +1,7 @@
 package com.eomcs.mylist.dao;
 
 import java.io.File;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 import com.eomcs.mylist.domain.Todo;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +14,8 @@ public class JsonTodoDao extends AbstractTodoDao {
   public JsonTodoDao() {
     try {
       ObjectMapper mapper = new ObjectMapper();
-      todoList.addAll(mapper.readValue(new File(filename), Todo[].class));
+      todoList.addAll(mapper.readValue(new File(filename), // 야 저 제이슨 데이터 todo객체로 만들어줘
+          mapper.getTypeFactory().constructCollectionType(List.class, Todo.class))); // 야 저 제이슨 데이터 List객체로 만들어줘 
 
     } catch (Exception e) {
       System.out.println("해야 할 일 데이터 로딩 중 오류 발생!");
