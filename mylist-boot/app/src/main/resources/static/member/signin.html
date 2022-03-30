@@ -2,29 +2,30 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>회원가입</title>
+  <title>로그인</title>
 </head>
 <body>
 
-<h1>회원가입</h1>
+<h1>로그인</h1>
 
 <form name="form1">
-이름*: <input name="name" type="text"><br>
-이메일*: <input name="email" type="email"><br>
-암호*: <input name="password" type="password"><br>
-별표(*) 항목은 필수 입력입니다.<br>
-<button id="x-add-btn">확인</button>
-<button id="x-cancel-btn" type="button">취소</button>
+이메일: <input name="email" type="email"><br>
+암호: <input name="password" type="password"><br>
+<div>
+	<button id="x-add-btn">로그인</button>
+	<button id="x-cancel-btn" type="button">취소</button>
+</div>
+<div>
+  <a href="form.html">회원가입</a>
+</div>
 </form>
 
 <script type="text/javascript">
-var xName = document.querySelector("input[name=name]");
 var xEmail = document.querySelector("input[name=email]");
 var xPassword = document.querySelector("input[name=password]");
   
 document.querySelector("form[name=form1]").onsubmit = function() {
-  if (xName.value == "" || 
-  		xEmail.value == "" ||
+  if ( xEmail.value == "" ||
   		xPassword.value == "") {
     window.alert("필수 입력 항목이 비어 있습니다.");
     return false;
@@ -32,7 +33,7 @@ document.querySelector("form[name=form1]").onsubmit = function() {
   
   var fd = new FormData(document.forms.namedItem("form1"));
   
-  fetch("/member/signup", { 
+  fetch("/member/signin", { 
       method: "POST",
       body: new URLSearchParams(fd)
     }) 
@@ -41,9 +42,9 @@ document.querySelector("form[name=form1]").onsubmit = function() {
     })
     .then(function(text) {
       if (text == "success") {
-    	  location.href = "signin.html";
+    	  location.href = "../index.html";
       } else {
-    	  window.alert("회원가입 실패!!");
+    	  window.alert("로그인 실패!")
       }
     });
   return false;

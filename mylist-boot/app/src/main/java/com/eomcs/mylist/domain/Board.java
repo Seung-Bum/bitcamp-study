@@ -9,4 +9,5 @@ public class Board {
   String content;
   int viewCount;
   java.sql.Date createdDate;
+  Member writer;
 }
