@@ -10,7 +10,7 @@ import com.eomcs.mylist.domain.Board;
 import com.eomcs.mylist.domain.Member;
 import com.eomcs.mylist.service.BoardService;
 
-@RestController 
+@RestController
 public class BoardController {
 
   @Autowired

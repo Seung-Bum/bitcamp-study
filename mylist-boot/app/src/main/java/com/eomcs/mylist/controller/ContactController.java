@@ -8,7 +8,7 @@ import com.eomcs.mylist.domain.Contact;
 import com.eomcs.mylist.domain.ContactTel;
 import com.eomcs.mylist.service.ContactService;
 
-@RestController 
+@RestController
 public class ContactController {
 
   @Autowired

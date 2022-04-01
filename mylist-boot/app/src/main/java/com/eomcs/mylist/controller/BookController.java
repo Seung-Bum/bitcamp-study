@@ -16,7 +16,7 @@ import com.eomcs.mylist.domain.Book;
 import com.eomcs.mylist.service.BookService;
 import net.coobird.thumbnailator.Thumbnails;
 
-@RestController 
+@RestController
 public class BookController {
 
   @Autowired
