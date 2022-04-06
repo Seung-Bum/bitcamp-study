@@ -19,11 +19,14 @@ $("#x-todo-input").keyup(function(e) {
 
     fetch(`/todo/add?title=${e.target.value}`)
       .then(function(response) {
-        return response.text();
+        return response.json();
       })
-      .then(function(text) {
-        console.log(text);
-        location.reload();
+      .then(function(result) {
+        if (result.status == "success") {
+          location.reload();
+        } else {
+          alert(result.data);
+        }
       });
   }
 });
@@ -32,9 +35,9 @@ fetch("/todo/list")
   .then(function(response) {
     return response.json();
   })
-  .then(function(todoList) {
-    console.log(todoList);
-    for (var todo of todoList) {
+  .then(function(result) {
+    console.log(result);
+    for (var todo of result.data) {
       var checkedOption = "";
       var titleTdOption = "";
       if (todo.done) {
@@ -57,8 +60,8 @@ function deleteTodo(no) {
        return response.json();
      })
      .then(function(result) {
-       if (result == 0) {
-         window.alert("삭제하지 못했습니다!");
+       if (result.status == "fail") {
+         window.alert(result.data);
        } else {
          location.reload();
        }
@@ -72,8 +75,8 @@ function checkTodo(no, checked) {
        return response.json();
      })
      .then(function(result) {
-       if (result == 0) {
-         window.alert("변경하지 못했습니다!");
+       if (result.status == "fail") {
+         window.alert(result.data);
        } else {
          var titleSpan = $(`tr[data-no="${no}"] > td.todo-title > span`);
          if (checked) {
@@ -113,8 +116,8 @@ titleInput.keyup(function(e) {
          return response.json();
        })
        .then(function(result) {
-         if (result == 0) {
-           window.alert("변경하지 못했습니다!");
+         if (result.status == "fail") {
+           window.alert(result.data);
          } else {
            console.log("변경했습니다.");
            titleSpan.html( titleInput.val() );

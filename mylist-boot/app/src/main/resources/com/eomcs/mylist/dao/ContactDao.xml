@@ -130,14 +130,14 @@
 
   <insert id="insertTel" parameterType="contactTel">
     insert into ml_cont_tel(contact_no, tt_no, tel)
-    values(#{contactNo}, #{telTypeNo}, #{tel})
+    values(#{contactNo}, #{telTypeNo}, #{tel}) 
   </insert>
   
-    <insert id="insertTels" parameterType="List">
+  <insert id="insertTels">
     insert into ml_cont_tel(contact_no, tt_no, tel)
     values
     <foreach collection="tels" item="contactTel" separator=",">
-    	(#{contactNo}, #{contactTel.telTypeNo}, #{contactTel.tel})
+      (#{contactNo}, #{contactTel.telTypeNo}, #{contactTel.tel}) 
     </foreach>
   </insert>
   

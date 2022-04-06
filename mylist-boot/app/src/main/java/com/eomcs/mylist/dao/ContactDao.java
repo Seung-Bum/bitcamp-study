@@ -29,7 +29,7 @@ public interface ContactDao {
 
   int insertTel(ContactTel tel);
 
-  int insertTels(@Param("contactNo") List<ContactTel> list, @Param("tels") List<ContactTel> tels);
+  int insertTels(@Param("contactNo") int contactNo, @Param("tels") List<ContactTel> tels);
 
   int updateTel(ContactTel tel);
 

@@ -23,5 +23,4 @@ public class ContactTel {
     this.contactNo = contactNo;
   }
 
-
 }
